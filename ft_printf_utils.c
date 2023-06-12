@@ -6,7 +6,7 @@
 /*   By: nmaturan <nmaturan@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 12:45:17 by nmaturan          #+#    #+#             */
-/*   Updated: 2023/06/12 20:01:36 by nmaturan         ###   ########.fr       */
+/*   Updated: 2023/06/12 20:30:20 by nmaturan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ int	ft_putchar(int c)
 	var = write(1, &c, 1);
 	if (var == -1)
 		return (-1);
-	printf("check putchar");
 	return (1);
 }
 
