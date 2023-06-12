@@ -6,13 +6,13 @@
 /*   By: nmaturan <nmaturan@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 14:40:54 by nmaturan          #+#    #+#             */
-/*   Updated: 2023/06/12 11:42:05 by nmaturan         ###   ########.fr       */
+/*   Updated: 2023/06/12 13:11:12 by nmaturan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include<stdarg.h>
-#include "libft.h"
 #include "ft_printf.h"
+#include "libft.h"
+#include <stdarg.h>
 
 
 static int	format_handler(va_list args, const char	format)
@@ -23,15 +23,17 @@ static int	format_handler(va_list args, const char	format)
 	if (format == 'c')
 		handler += ft_putchar(va_arg(args, int));
 	else if (format == 's') 
-		handler += ft_putstr(va_arg(args, int));
+		handler += ft_putstr(va_arg(args, char *));
 	else if (format == 'p')
-		handler += ft_putptr(va_arg(args, int));
+		handler += ft_putptr(va_arg(args, unsigned long));
 	else if (format == 'd' || format == 'i')
 		handler += ft_putnbr(va_arg(args, int));
 	else if (format == 'u')
-		handler += ft_putunbr(va_arg(args, int));
+		handler += ft_putunbr(va_arg(args, unsigned int ));
 	else if (format == 'x')
-		handler += ft_puthex(va_arg(args, int));
+		handler += ft_putlhex(va_arg(args, long));
+	else if (format == 'X')
+		handler += ft_putuhex(va_arg(args, long));
 	else if (format == '%')
 		handler += ft_putchar('%');
 

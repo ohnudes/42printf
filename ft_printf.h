@@ -6,7 +6,7 @@
 /*   By: nmaturan <nmaturan@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 11:42:18 by nmaturan          #+#    #+#             */
-/*   Updated: 2023/06/12 11:47:29 by nmaturan         ###   ########.fr       */
+/*   Updated: 2023/06/12 13:12:20 by nmaturan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,12 @@
 int			ft_printf(const char *str, ...);
 static int	format_handler(va_list args, const char format);
 
-int	ft_putchar();
-int	ft_putstr();
-int	ft_putptr();
-int	ft_putnbr();
-int	ft_putunbr();
-int	ft_puthex();
+int	ft_putchar(int c);
+int	ft_putstr(char *);
+int	ft_putptr(unsigned long c);
+int	ft_putnbr(int c);
+int	ft_putunbr(unsigned int c);
+int	ft_putlhex(unsigned long c);
+int	ft_putuhex(unsigned long c);
 
 #endif // DEBUG
