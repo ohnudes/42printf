@@ -6,7 +6,7 @@
 /*   By: nmaturan <nmaturan@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 14:40:54 by nmaturan          #+#    #+#             */
-/*   Updated: 2023/06/12 13:11:12 by nmaturan         ###   ########.fr       */
+/*   Updated: 2023/06/12 18:25:25 by nmaturan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,34 +17,35 @@
 
 static int	format_handler(va_list args, const char	format)
 {
-	int	handler;
+	int	format_len;
+	int	check;
 
-	handler =  0;
+	format_len =  0;
 	if (format == 'c')
-		handler += ft_putchar(va_arg(args, int));
+		format_len = ft_putchar(va_arg(args, int));
 	else if (format == 's') 
-		handler += ft_putstr(va_arg(args, char *));
+		format_len = ft_putstr(va_arg(args, char *));
 	else if (format == 'p')
-		handler += ft_putptr(va_arg(args, unsigned long));
+		format_len = ft_putptr(va_arg(args, unsigned long));
 	else if (format == 'd' || format == 'i')
-		handler += ft_putnbr(va_arg(args, int));
+		format_len = ft_putnbr(va_arg(args, int));
 	else if (format == 'u')
-		handler += ft_putunbr(va_arg(args, unsigned int ));
-	else if (format == 'x')
-		handler += ft_putlhex(va_arg(args, long));
-	else if (format == 'X')
-		handler += ft_putuhex(va_arg(args, long));
+		format_len = ft_putunbr(va_arg(args, unsigned int));
+//	else if (format == 'x')
+//		format_len = ft_putlhex(va_arg(args, unsigned int));
+//	else if (format == 'X')
+		//format_len = ft_putuhex(va_arg(args, long));
 	else if (format == '%')
-		handler += ft_putchar('%');
-
-	return (handler);
+		format_len = ft_putchar('%');
+	return (format_len);
 }
 
 int	ft_printf(const char *str, ...)
 {
+	va_list	args;
 	size_t	i;
 	int		format_len;
-	va_list	args;
+	int		total;
 
 	i = 0;
 	format_len = 0;
@@ -52,21 +53,21 @@ int	ft_printf(const char *str, ...)
 	while (str[i])
 	{
 		if (str[i] == '%')
-		{
-			format_len += format_handler(args, str[i + 1]);
-			i++;
-		}
+			format_len += format_handler(args, str[++i]);
 		else
 			format_len += ft_putchar(str[i]);
 		i++;
-
+		if (format_len  == -1)
+			return (-1);
+		else
+			total += format_len;
 	}
 	va_end(args);
-	return (format_len);
+	return (total);
 }
 
 int	main(int argc, char **argv)
 {
-
+	ft_printf("%c", argv[1]);
 	return (0);
 }
