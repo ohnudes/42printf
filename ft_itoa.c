@@ -6,11 +6,10 @@
 /*   By: nmaturan <nmaturan@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 21:43:59 by nmaturan          #+#    #+#             */
-/*   Updated: 2023/06/12 18:04:27 by nmaturan         ###   ########.fr       */
+/*   Updated: 2023/06/12 19:55:21 by nmaturan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
 #include "libft.h"
 
 static int	digit_count(int n)
@@ -47,23 +46,23 @@ static char	*do_itoa(char *dst, int digits, int n)
 
 char	*ft_itoa(int n)
 {
-	int		digits;
-	char	*res;
+	int			digits;
+	char		*res;
+	long int	max_num;
 
-	if (n == -2147483648)
-		return ((char *)ft_putstr("-2147483648"));
-	digits = digit_count(n);
-	if (n < 0)
+	max_num = n;
+	digits = digit_count(max_num);
+	if (max_num < 0)
 		digits++;
 	res = malloc(sizeof(char) * (digits + 1));
 	if (!res)
 		return (NULL);
-	if (n < 0)
+	if (max_num < 0)
 	{
 		res[0] = '-';
-		*(res + 1) = *do_itoa(res + 1, digits - 1, -n);
+		*(res + 1) = *do_itoa(res + 1, digits - 1, - max_num);
 	}
 	else
-		res = do_itoa(res, digits, n);
+		res = do_itoa(res, digits, max_num);
 	return (res);
 }

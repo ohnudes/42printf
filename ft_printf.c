@@ -6,7 +6,7 @@
 /*   By: nmaturan <nmaturan@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 14:40:54 by nmaturan          #+#    #+#             */
-/*   Updated: 2023/06/12 18:25:25 by nmaturan         ###   ########.fr       */
+/*   Updated: 2023/06/12 20:02:57 by nmaturan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,6 @@ int	ft_printf(const char *str, ...)
 
 int	main(int argc, char **argv)
 {
-	ft_printf("%c", argv[1]);
+	ft_printf("%c",argv[1]);
 	return (0);
 }

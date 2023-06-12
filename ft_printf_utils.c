@@ -6,12 +6,14 @@
 /*   By: nmaturan <nmaturan@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 12:45:17 by nmaturan          #+#    #+#             */
-/*   Updated: 2023/06/12 18:03:10 by nmaturan         ###   ########.fr       */
+/*   Updated: 2023/06/12 20:01:36 by nmaturan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include "libft.h"
+#include <ctype.h>
+#include <stdio.h>
 #include <unistd.h>
 
 int	ft_putchar(int c)
@@ -21,6 +23,7 @@ int	ft_putchar(int c)
 	var = write(1, &c, 1);
 	if (var == -1)
 		return (-1);
+	printf("check putchar");
 	return (1);
 }
 
