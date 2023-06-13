@@ -6,7 +6,7 @@
 /*   By: nmaturan <nmaturan@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 11:42:18 by nmaturan          #+#    #+#             */
-/*   Updated: 2023/06/13 19:42:47 by nmaturan         ###   ########.fr       */
+/*   Updated: 2023/06/13 20:09:07 by nmaturan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,19 @@
 # include <unistd.h>
 # include <stdlib.h>
 
-int			ft_printf(const char *str, ...);
+int	ft_printf(const char *str, ...);
 int	format_handler(va_list args, const char	format);
 
 int	ft_putchar(int c);
 int	ft_putstr(char *s);
-int	ft_putptr(unsigned long p);
 int	ft_putnbr(int d);
+int	ft_putunbr(unsigned int u);
 int	ft_puthex(unsigned int x);
+int	ft_putptr(unsigned long p);
+
 //int	ft_putlhex(unsigned long c);
 //int	ft_putuhex(unsigned long c);
+
 char	*ft_itoa(int c);
 
 #endif // DEBUG

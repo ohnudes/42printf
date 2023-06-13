@@ -6,13 +6,12 @@
 /*   By: nmaturan <nmaturan@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 12:45:17 by nmaturan          #+#    #+#             */
-/*   Updated: 2023/06/13 19:44:12 by nmaturan         ###   ########.fr       */
+/*   Updated: 2023/06/13 20:08:38 by nmaturan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include <ctype.h>
-#include <stdio.h>
 #include <unistd.h>
 
 // %c - functional
@@ -57,12 +56,39 @@ int	ft_putnbr(int d)
 	
 	s = ft_itoa(d);
 	str_lenght = ft_putstr(s);
-	free (s);
-	
+	if (str_lenght == -1)
+	{
+		if (s)
+			free (s);
+		return (-1);
+	}
+	if (s)
+		free (s);
+
 	return (str_lenght);
 }
 
-// %p
+// %u - TO BE TESTED 
+int	ft_putunbr(unsigned int u)
+{
+	int		str_lenght;
+	char	*s;
+
+	s = ft_itoa(u);
+	str_lenght = ft_putstr(s);
+	if (str_lenght == -1)
+	{
+		if (s)
+			free (s);
+		return (-1);
+	}
+	if (s)
+		free (s);
+
+	return (str_lenght);
+}
+
+// %x - functional
 int	ft_puthex(unsigned int x)
 {
 	int	var;
@@ -83,6 +109,7 @@ int	ft_puthex(unsigned int x)
 	return (total);
 }
 
+// %p - functional
 int	ft_putptr(unsigned long p)
 {
 	int	var;
@@ -100,20 +127,6 @@ int	ft_putptr(unsigned long p)
 		return (-1);
 	return (var + 2);
 }
-
-/*
-int	ft_putunbr(unsigned int c)
-{
-	int		str_lenght;
-	char	*s;
-	
-	s = ft_itoa(c);
-	str_lenght = ft_putstr(s);
-	free (s);
-
-	return (1);
-}*/
-
 
 /*
 int	ft_putuhex(unsigned int c)

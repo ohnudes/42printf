@@ -6,7 +6,7 @@
 /*   By: nmaturan <nmaturan@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 14:40:54 by nmaturan          #+#    #+#             */
-/*   Updated: 2023/06/13 19:44:55 by nmaturan         ###   ########.fr       */
+/*   Updated: 2023/06/13 20:09:35 by nmaturan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ int	format_handler(va_list args, const char	format)
 		format_len = ft_putptr(va_arg(args, unsigned long));
 	else if (format == 'x')
 		format_len = ft_puthex(va_arg(args, unsigned int));
-	//else if (format == 'u')
-	//	format_len = ft_putunbr(va_arg(args, unsigned int));
+	else if (format == 'u')
+		format_len = ft_putunbr(va_arg(args, unsigned int));
 //	else if (format == 'X')
 		//format_len = ft_putuhex(va_arg(args, long));
 	else if (format == '%')
@@ -67,7 +67,7 @@ int	ft_printf(const char *str, ...)
 
 int	main(int argc, char **argv)
 {
-	ft_printf("ft_printf testing %x\n", "cualquierhambrehermano");
-	printf("printf testing %x\n", "cualquierhambrehermano");
+	ft_printf("ft_printf testing %u\n", "cualquierhambrehermano");
+	printf("printf testing %u\n", "cualquierhambrehermano");
 	return (0);
 }
