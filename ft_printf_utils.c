@@ -6,16 +6,16 @@
 /*   By: nmaturan <nmaturan@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 12:45:17 by nmaturan          #+#    #+#             */
-/*   Updated: 2023/06/12 20:30:20 by nmaturan         ###   ########.fr       */
+/*   Updated: 2023/06/13 19:44:12 by nmaturan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include "libft.h"
 #include <ctype.h>
 #include <stdio.h>
 #include <unistd.h>
 
+// %c - functional
 int	ft_putchar(int c)
 {
 	int var;
@@ -26,21 +26,22 @@ int	ft_putchar(int c)
 	return (1);
 }
 
-int	ft_putstr(char *str)
+// %s - functional
+int	ft_putstr(char *s)
 {
 	int	i;
 	int	check;
 
 	i = 0;
-	if (!str)
+	if (!s)
 	{
 		check = write(1, "(null)", 6);
 		if (check == -1)
 			return (check);
 	}
-	while (str[i])
+	while (s[i])
 	{
-		check = write(1, &str[i], 1);
+		check = write(1, &s[i], 1);
 		if (check == -1)
 			return (check);
 		i++;
@@ -48,50 +49,33 @@ int	ft_putstr(char *str)
 	return (i + 1);
 }
 
-/*
-int	ft_putptr(unsigned long c)
-{
-	return (1);
-}
-*/
-int	ft_putnbr(int c)
+// %d - functional
+int	ft_putnbr(int d)
 {
 	int		str_lenght;
-	char	*str;
+	char	*s;
 	
-	str = ft_itoa(c);
-	str_lenght = ft_putstr(str);
-	free (str);
+	s = ft_itoa(d);
+	str_lenght = ft_putstr(s);
+	free (s);
 	
 	return (str_lenght);
 }
 
-int	ft_putunbr(unsigned int c)
-{
-	int		str_lenght;
-	char	*str;
-	
-	str = ft_itoa(c);
-	str_lenght = ft_putstr(str);
-	free (str);
-
-	return (1);
-}
-
-
-int	do_hex(unsigned long num)
+// %p
+int	ft_puthex(unsigned int x)
 {
 	int	var;
 	int	total;
 
 	total = 0;
-	if (num)
+	if (x)
 	{	
-		var = do_hex(num/16);
+		var = ft_puthex(x/16);
 		if (var == -1)
 			return (-1);
 		total += var;
-		var = ft_putchar("0123456789abcdef"[num % 16]);
+		var = ft_putchar("0123456789abcdef"[x % 16]);
 		if (var == -1)
 			return (-1);
 		total += var;
@@ -99,11 +83,11 @@ int	do_hex(unsigned long num)
 	return (total);
 }
 
-int	ft_putptr(unsigned long num)
+int	ft_putptr(unsigned long p)
 {
 	int	var;
 
-	if (!num)
+	if (!p)
 	{
 		var = ft_putstr("0x0");
 		return (var);
@@ -111,15 +95,36 @@ int	ft_putptr(unsigned long num)
 	var = ft_putstr("0x");
 	if (var == -1)
 		return (-1);
-	var = do_hex(num);
+	var = ft_puthex(p);
 	if (var == -1)
 		return (-1);
 	return (var + 2);
 }
+
+/*
+int	ft_putunbr(unsigned int c)
+{
+	int		str_lenght;
+	char	*s;
+	
+	s = ft_itoa(c);
+	str_lenght = ft_putstr(s);
+	free (s);
+
+	return (1);
+}*/
+
+
 /*
 int	ft_putuhex(unsigned int c)
 {
 
+	return (1);
+}
+*/
+/*
+int	ft_putptr(unsigned long c)
+{
 	return (1);
 }
 */
