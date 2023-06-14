@@ -6,7 +6,7 @@
 /*   By: nmaturan <nmaturan@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 14:40:54 by nmaturan          #+#    #+#             */
-/*   Updated: 2023/06/13 20:09:35 by nmaturan         ###   ########.fr       */
+/*   Updated: 2023/06/14 11:08:36 by nmaturan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,9 @@ int	ft_printf(const char *str, ...)
 
 int	main(int argc, char **argv)
 {
-	ft_printf("ft_printf testing %u\n", "cualquierhambrehermano");
-	printf("printf testing %u\n", "cualquierhambrehermano");
+	int	res = ft_printf("ft_printf testing %s\n", "25");
+	int res2 = printf("printf testing %s\n", "25");
+
+	printf("ft_printf len = %d\nprintf len = %d\n", res, res2);
 	return (0);
 }
