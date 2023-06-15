@@ -6,80 +6,131 @@
 /*   By: nmaturan <nmaturan@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 17:19:47 by nmaturan          #+#    #+#             */
-/*   Updated: 2023/06/14 20:09:19 by nmaturan         ###   ########.fr       */
+/*   Updated: 2023/06/15 16:27:54 by nmaturan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include "42libft/libft.h"
-#include <stdarg.h>
 
-int	format_handler(va_list args, const char format)
+typedef struct	s_lc
 {
+	int			len;
+	int			check;
+}				t_lc;
+
+int	format_handler(t_lc *total, va_list args, const char format)
+{
+
+	// cspdiuxX%
 	if (format == 'c')
-
-
-	return (total);
+		total->len = ft_putchar(total->check, va_arg(args, int));
+	else if (format == 's')
+		total->len = ft_putstr(total->check, va_arg(args, char *));
+	else if (format == 'p')
+		total->len = ft_putptr(total->check, va_arg(args, unsigned long));
+	else if (format == 'd' || format == 'i')
+		total->len = ft_itoa(total->check, va_arg(args, int));
+	else if (format == 'u')
+		total->len = ft_uitoa(total->check, va_arg(args, unsigned int));
+	else if (format == 'x')
+		total->len = ft_put_l_hex(total->check, va_arg(args, unsigned int ));
+	else if (format == 'X')
+		total->len = ft_put_u_hex(total->check, va_arg(args, unsigned int));
+	else if (format == '%')
+		total->len = ft_printchr(total->check, '%');
+	if (total->check == -1)
+		return (-1);
+	return (total->len);
 }
+
+// completed
+char	*ft_strchr(t_lc *total, const char *str, char c)
+{
+	char	*ref;
+	size_t	i;
+
+	if (!str)
+	{
+		write(1, "(null)", 6);
+		total->check = 1;
+		return (0);
+	}
+	ref = (char *) str;
+	i = 0;
+	while (ref[i] != c && ref[i])
+		i++;
+	return (&ref[i]);
+}
+
+/* Idea:
+ * 1. Deal with split logic for multiple % intercalated with normal strings.
+ *		1.2 - return depending of struct rather than checking at every level.
+ * 2. Deal with different formats.
+ *
+ */
 
 int	ft_printf(const char *str, ...) 
 {
 	va_list args;
-	size_t	i;
-	char	*iter;
-	int		strlen;
-	int		refchk;
-
-	// objectives
-	// 1. return (string lenght + format_len value)
-	// 2. look for '%'s and multiple signs
-
+	t_lc	total;
+	char	*ref;
+	
+	total.len = 0;
+	total.check = 0;
 	va_start(args, str);
-	refchk = ft_strchr(str, '%');
-	
-		// strlen  
-	if (!(ft_strchr(str + i, '%')))
-		strlen = ft_printstr(str);
-	else 
+	ref = ft_strchr(&total, str, '%');
+	while (str && total.check != 1)
 	{
-		
-	
-		ft_s
-	}
-	while (str[i])
-	{
-		if (!(ft_strchr(str + i, '%')))
-			strlen = ft_printstr(str+i);
-		if (refchk)
+		while (str && str < ref  && total.check != 1)
 		{
-			ft_substr(const char *s, unsigned int start, size_t len)
+			total.len = ft_putchar(&total, *str, total); 
+			str += total.len;
 		}
-	}
-
-
-	va_end(args);
-	return (strlen);
-}
-
-{
-	{
-		// %cspdiuxX%
-		if (*str == '%')
+		if (str == ref && total.check != 1)
 		{
-			format_len = format_handler(args, (*str + 1));
+			total.len = format_handler(&total, args, *++str);
 			str++;
+			ref = ft_strchr(&total, str, '%');
 		}
-		if (format_len == -1)
-			return (-1);
-		strlen += format_len;
-		str++;
 	}
-	va_end(args);
-
-
-	return (strlen);
+	if (total.check == 1)
+		return (-1);
+	return (total.len);
 }
+/*
+int	ft_printf(const char *str, ...) 
+{
+	va_list args;
+	t_lc	total;
+	char	*ref;
+	size_t	i;
+	
+	total.len = 0;
+	total.check = 0;
+	va_start(args, str);
+	ref = ft_strchr(str, '%');
+	while (str && total.check != 1)
+	{
+		while (str && str < ref  && total.check != 1)
+		{
 
+// checkear si es posible remplazar la funcion por un format handler con el arg dado.
+			total.len = ft_putchar(*str, total); 
+			str += total.len;
+		}
+
+		if (str == ref && total.check != 1)
+		{
+			total.len = format_handler(&total, args, *++str);
+			str++;
+			ref = ft_strchr(str, '%');
+		}
+	}
+	if (total.check == 1)
+		return (-1);
+	return (total.len);
+}
+*/
 #include <stdio.h>
 
 int	main(int argc, char **argv)
