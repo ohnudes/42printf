@@ -6,7 +6,7 @@
 /*   By: nmaturan <nmaturan@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 17:19:47 by nmaturan          #+#    #+#             */
-/*   Updated: 2023/06/16 12:33:58 by nmaturan         ###   ########.fr       */
+/*   Updated: 2023/06/16 13:40:20 by nmaturan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,21 +15,21 @@
 int	format_handler(t_lc *total, va_list args, const char format)
 {
 	if (format == 'c')
-		total->len = ft_putchar(&total, va_arg(args, int));
+		total->len = ft_putchar(&*total, va_arg(args, int));
 	else if (format == 's')
-		total->len = ft_putstr(&total, va_arg(args, char *));
+		total->len = ft_putstr(&*total, va_arg(args, char *));
 	else if (format == 'p')
-		total->len = ft_putptr(&total, va_arg(args, unsigned long));
+		total->len = ft_putptr(&*total, va_arg(args, unsigned long));
 	else if (format == 'd' || format == 'i')
-		total->len = ft_putint(&total, va_arg(args, int));
+		total->len = ft_putint(&*total, va_arg(args, int));
 	else if (format == 'u')
-		total->len = ft_putuint(&total, va_arg(args, unsigned int));
+		total->len = ft_putuint(*&total, va_arg(args, unsigned int));
 	else if (format == 'x')
-		total->len = ft_put_l_hex(&total, va_arg(args, unsigned int ));
+		total->len = ft_put_l_hex(&*total, va_arg(args, unsigned int ));
 	else if (format == 'X')
-		total->len = ft_put_u_hex(&total, va_arg(args, unsigned int));
+		total->len = ft_put_u_hex(&*total, va_arg(args, unsigned int));
 	else if (format == '%')
-		total->len = ft_putchar(&total, '%');
+		total->len = ft_putchar(&*total, '%');
 	if (total->check == -1)
 		return (-1);
 	return (total->len);
@@ -76,7 +76,7 @@ int	ft_printf(const char *str, ...)
 	{
 		while (str && str < ref  && total.check != 1)
 		{
-			total.len = ft_putchar(&total.check, *str); 
+			total.len = ft_putchar(&total, *str); 
 			str += total.len;
 		}
 		if (str == ref && total.check != 1)
@@ -90,7 +90,7 @@ int	ft_printf(const char *str, ...)
 		return (-1);
 	return (total.len);
 }
-
+/*
 #include <stdio.h>
 
 int	main(int argc, char **argv)
@@ -102,4 +102,4 @@ int	main(int argc, char **argv)
 	printf("OS_printf returns = %d\n", res);
 	
 	return (0);
-}
+}*/

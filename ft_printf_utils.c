@@ -6,7 +6,7 @@
 /*   By: nmaturan <nmaturan@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 11:57:39 by nmaturan          #+#    #+#             */
-/*   Updated: 2023/06/16 12:43:11 by nmaturan         ###   ########.fr       */
+/*   Updated: 2023/06/16 14:03:57 by nmaturan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int		ft_putstr(t_lc *total, char *s)
 {
 	int	len;
 
+	len = 0;
 	if (!s)
 	{
 		write(1, "(null)", 6);
@@ -38,9 +39,8 @@ int		ft_putstr(t_lc *total, char *s)
 	}
 	while (s)
 	{
-		total->check = write(1, &s, 1);
-		if (total->check == 1)
-			return (0);
+		if (!write(1, &s, 1))
+			total->check = 1;
 		s++;
 		len++;
 	}
@@ -53,26 +53,60 @@ int		ft_putptr(t_lc *total, unsigned long p)
 
 	len = 0;
 	if (!p)
-		len = ft_putstr(&total, "0x0");
+		len = ft_putstr(&*total, "0x0");
 	else
-		len = ft_putstr(&(char *) total, "0x");
-	;
+		len = ft_putstr(&*total, "0x");
+	
 	return (len);
 }
 
 int		ft_putint(t_lc *total, int i)
 {
-	
+	int	len;
+
+	len = 0;
+	if (i == -2147483648)
+	{
+		len = !write(1, "-2147483648", 11);
+		if (len == -1)
+			total->check = 1;
+		else
+			return (len);
+	}
+ 	if (i < 0)
+	{
+		ft_putchar(&*total, '-');
+		i = -i;
+	}
+	if (i / 10 && total->check != 1)
+		ft_putint(&*total, i/10);
+	ft_putchar(&*total, i % 10);
+	len++;
+	return (len);
 }
 
-int		ft_putuint(t_lc *total, unsigned int u);
+int		ft_putuint(t_lc *total, unsigned int u)
 {
-	
+	int	len;
+
+	len = 0;
+	if (u / 10 && total->check != 1)
+		ft_putint(&*total, u / 10);
+	ft_putchar(&*total, u % 10);
+	len++;
+	return (len);
 }
 
 int		ft_put_l_hex(t_lc *total, unsigned int x);
 {
-	
+	int var;
+	int total;
+
+	total = 0;
+	if (x)
+	{
+		var = ft_puthex(x/16
+	}
 }
 
 int		ft_put_u_hex(t_lc *total, unsigned int X);
