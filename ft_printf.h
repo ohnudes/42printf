@@ -6,7 +6,7 @@
 /*   By: nmaturan <nmaturan@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 17:20:51 by nmaturan          #+#    #+#             */
-/*   Updated: 2023/06/15 16:35:38 by nmaturan         ###   ########.fr       */
+/*   Updated: 2023/06/16 12:35:58 by nmaturan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,13 @@ int		ft_printf(const char *str, ...);
 int		format_handler(t_lc *total, va_list args, const char format);
 char	*ft_strchr(t_lc *total, const char *str, char c);
 
-int		ft_putchar(int	*check, int c);
-int		ft_putstr(int *check, char *s);
-int		ft_putptr(int *check, unsigned long p);
-int		ft_putitoa(int *check, int i);
-int		ft_putuitoa(int *check, unsigned int u);
-int		ft_put_l_hex(int *check, unsigned int x);
-int		ft_put_u_hex(int *check, unsigned int X);
+int		ft_putchar(t_lc *total, int c);
+int		ft_putstr(t_lc *total, char *s);
+int		ft_putptr(t_lc *total, unsigned long p);
+int		ft_putint(t_lc *total, int i);
+int		ft_putuint(t_lc *total, unsigned int u);
+int		ft_put_l_hex(t_lc *total, unsigned int x);
+int		ft_put_u_hex(t_lc *total, unsigned int X);
 
 
 #endif // !FT_PRINTF_H
