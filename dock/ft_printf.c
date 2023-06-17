@@ -6,7 +6,7 @@
 /*   By: nmaturan <nmaturan@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 17:19:47 by nmaturan          #+#    #+#             */
-/*   Updated: 2023/06/17 21:23:49 by nmaturan         ###   ########.fr       */
+/*   Updated: 2023/06/17 22:46:43 by nmaturan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,32 @@ int	ft_strchr(t_lc *total, const char *str, char c)
 		i++;
 	return (i);
 }
+/*
+int	ft_printf(const char *str, ...)
+{
+	va_list	args;
+	t_lc	total;
+	int		ref;
+
+	total.len = 0;
+	total.check = 0;
+	va_start(args, str);
+//	ref = ft_strchr(&total, str, '%');
+	while (str && total.check != -1)
+	{
+		while (str[total.len] && total.len < ref && total.check != -1)
+			ft_putchar(&total, *str);
+//		if (total.len == ref && total.check != -1)
+//		{
+//			format_handler(&total, args, str[total.len + 1]);
+//			if (str[total.len])
+//				ref = ft_strchr(&total, (str + total.len), '%');
+//		}
+	}
+	if (total.check == -1)
+		return (-1);
+	return (total.len);
+}*/
 
 int	ft_printf(const char *str, ...)
 {
@@ -61,31 +87,32 @@ int	ft_printf(const char *str, ...)
 	total.len = 0;
 	total.check = 0;
 	va_start(args, str);
-	ref = ft_strchr(&total, str, '%');
-	while (str && total.check != -1)
+//	ref = ft_strchr(&total, str, '%');
+	while (str[total.check] && total.check != -1)
 	{
-		while (str[total.len] && total.len < ref && total.check != -1)
-			ft_putchar(&total, *str);
-		if (total.len == ref && total.check != -1)
-		{
-			format_handler(&total, args, str[total.len + 1]);
-			if (str[total.len])
-				ref = ft_strchr(&total, (str + total.len), '%');
-		}
+		ft_putchar(&total, *str);
+		//while (str[total.len] && total.len < ref && total.check != -1)
+//		if (total.len == ref && total.check != -1)
+//		{
+//			format_handler(&total, args, str[total.len + 1]);
+//			if (str[total.len])
+//				ref = ft_strchr(&total, (str + total.len), '%');
+//		}
 	}
 	if (total.check == -1)
 		return (-1);
 	return (total.len);
 }
-/*
+
 #include <stdio.h>
-int	main(int argc, char **argv)
+
+int	main()
 {
-	int	res = ft_printf("", argv[1]);
-	int res2 = printf("", argv[1]);
+	int	res = ft_printf("123");
+	int res2 = printf("123");
 
 	printf("ft_printf returns = %d\n", res);
 	printf("OS_printf returns = %d\n", res);
 	
 	return (0);
-}*/
+}

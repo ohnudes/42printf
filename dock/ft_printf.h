@@ -6,18 +6,18 @@
 /*   By: nmaturan <nmaturan@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 17:20:51 by nmaturan          #+#    #+#             */
-/*   Updated: 2023/06/17 21:17:56 by nmaturan         ###   ########.fr       */
+/*   Updated: 2023/06/17 22:18:57 by nmaturan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
-#include <unistd.h>
-#include <stdlib.h>
-#include <stdarg.h>
+# include <unistd.h>
+# include <stdlib.h>
+# include <stdarg.h>
 
-typedef struct	s_lc
+typedef struct s_lc
 {
 	int			len;
 	int			check;
@@ -35,6 +35,5 @@ void	ft_putint(t_lc *total, int i);
 void	ft_putuint(t_lc *total, unsigned int u);
 void	ft_put_l_hex(t_lc *total, unsigned int x);
 void	ft_put_u_hex(t_lc *total, unsigned int X);
-
 
 #endif
