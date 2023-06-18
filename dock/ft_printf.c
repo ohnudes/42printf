@@ -6,11 +6,12 @@
 /*   By: nmaturan <nmaturan@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 17:19:47 by nmaturan          #+#    #+#             */
-/*   Updated: 2023/06/18 16:37:20 by nmaturan         ###   ########.fr       */
+/*   Updated: 2023/06/18 21:34:43 by nmaturan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include <limits.h>
 #include <stdio.h>
 
 int	format_handler(t_lc *total, va_list args, const char format)
@@ -60,32 +61,28 @@ int	ft_printf(const char *str, ...)
 		return (-1);
 	return (total.len);
 }
-
-int	main(void)
-{
-	int	res;
-	int	res2;
-
-	res = ft_printf("%s", (char *)NULL);
-	printf("\n");
-	res2 = printf("%s", (char *)NULL);
-	printf("\n");
-	printf("diff ft_printf / os_printf\n%d  || %d", res, res2);
-	printf("\n");
-	return (0);
-}
 /*
+25:     TEST(1, print(" %p ", -1));
+26:     TEST(2, print(" %p ", 1));
+27:     TEST(3, print(" %p ", 15));
+28:     TEST(4, print(" %p ", 16));
+29:     TEST(5, print(" %p ", 17));
+30:     TEST(6, print(" %p %p ", LONG_MIN, LONG_MAX));
+31:     TEST(7, print(" %p %p ", INT_MIN, INT_MAX));
+32:     TEST(8, print(" %p %p ", ULONG_MAX, -ULONG_MAX));
+33:     TEST(9, print(" %p %p ", 0, 0));
+*/
 int	main()
 {
 	printf("/// FT_PRINTF ///\n");
-	int	res = ft_printf("abc %s %p", "123", "");
+	int	res = ft_printf(" %p ", LONG_MAX);
 	printf("\n");
 	printf("/// OS_PRINTF ///\n");
-	int res2 = printf("abc %s %p", "123", "");
+	int res2 = printf(" %p ", LONG_MAX);
 	printf("\n");
 
 	printf("ft_printf returns = %d\n", res);
 	printf("OS_printf returns = %d\n", res);
 	
 	return (0);
-}*/
+}

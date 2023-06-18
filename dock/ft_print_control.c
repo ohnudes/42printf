@@ -6,7 +6,7 @@
 /*   By: nmaturan <nmaturan@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 22:21:37 by nmaturan          #+#    #+#             */
-/*   Updated: 2023/06/18 16:51:34 by nmaturan         ###   ########.fr       */
+/*   Updated: 2023/06/18 20:02:15 by nmaturan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,10 @@ void	ft_putstr(t_lc *total, char	*s)
 	int	i;
 
 	if (!s || s == NULL)
+	{
 		ft_putstr(&*total, "(null)");
+		return ;
+	}
 	i = 0;
 	while (s[i] != '\0' && total->check != -1)
 	{
