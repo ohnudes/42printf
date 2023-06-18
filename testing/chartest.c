@@ -6,19 +6,19 @@
 /*   By: nmaturan <nmaturan@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 22:49:07 by nmaturan          #+#    #+#             */
-/*   Updated: 2023/06/17 22:57:52 by nmaturan         ###   ########.fr       */
+/*   Updated: 2023/06/18 13:55:59 by nmaturan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <stdarg.h>
+#include <stdio.h>
 
 typedef struct s_lc
 {
 	int			len;
 	int			check;
 }				t_lc;
-
 
 void	ft_putchar(t_lc *total, int c)
 {
@@ -31,7 +31,7 @@ void	ft_putchar(t_lc *total, int c)
 		total->len = -1;
 	}
 	else
-		total->len++;
+		total->len += 1;
 }
 
 int	ft_printf(const char *str, ...)
@@ -43,8 +43,8 @@ int	ft_printf(const char *str, ...)
 	total.len = 0;
 	total.check = 0;
 	va_start(args, str);
-	while (str[total.check] && total.check != -1)
-		ft_putchar(&total, *str);
+	while (str[total.len] && total.check != -1)
+		ft_putchar(&total, str[total.len]);
 	if (total.check == -1)
 		return (-1);
 	return (total.len);

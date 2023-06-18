@@ -6,7 +6,7 @@
 /*   By: nmaturan <nmaturan@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 12:15:44 by nmaturan          #+#    #+#             */
-/*   Updated: 2023/06/17 22:41:06 by nmaturan         ###   ########.fr       */
+/*   Updated: 2023/06/18 14:40:13 by nmaturan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 int	main(void)
 {
 	printf ("Case 1 == %%\n");
-	int	res = printf ("%");
+	int	res = printf ("% ola");
 	printf ("\n");
 	printf ("RES case 1 %d\n", res);
 
@@ -37,5 +37,11 @@ int	main(void)
 	printf ("\n");
 	printf ("RES case 2 %d\n", res2);
 
+	printf ("////////////////\n");
+
+	printf ("Case 3 == '\''0'\n");
+	int	res3 = printf ("a\0b\0c\0", 1);
+	printf ("\n");
+	printf ("RES case 3 %d\n", res3);
 	return (0);
 }
