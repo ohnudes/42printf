@@ -6,20 +6,23 @@
 /*   By: nmaturan <nmaturan@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 11:57:39 by nmaturan          #+#    #+#             */
-/*   Updated: 2023/06/18 21:14:15 by nmaturan         ###   ########.fr       */
+/*   Updated: 2023/06/18 22:02:54 by nmaturan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_putptr(t_lc *total, unsigned long p)
+void	ft_putptr(t_lc *total, void *p)
 {
+	unsigned int	cp;
+
+	cp = (unsigned long) p;
 	if (!p)
 		ft_putstr(&*total, "0x0");
 	else
 		ft_putstr(&*total, "0x");
 	if (total->check != -1)
-		ft_put_l_hex(&*total, p);
+		ft_put_l_hex(&*total, cp);
 }
 
 void	ft_putint(t_lc *total, int i)

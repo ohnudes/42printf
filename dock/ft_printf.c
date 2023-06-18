@@ -6,7 +6,7 @@
 /*   By: nmaturan <nmaturan@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 17:19:47 by nmaturan          #+#    #+#             */
-/*   Updated: 2023/06/18 21:34:43 by nmaturan         ###   ########.fr       */
+/*   Updated: 2023/06/18 22:00:55 by nmaturan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	format_handler(t_lc *total, va_list args, const char format)
 	else if (format == 's' && total->check != -1)
 		ft_putstr(&*total, va_arg(args, char *));
 	else if (format == 'p' && total->check != -1)
-		ft_putptr(&*total, va_arg(args, unsigned long));
+		ft_putptr(&*total, va_arg(args, void *));
 	else if ((format == 'd' || format == 'i') && total->check != -1)
 		ft_putint(&*total, va_arg(args, int));
 	else if (format == 'u' && total->check != -1)
@@ -71,18 +71,17 @@ int	ft_printf(const char *str, ...)
 31:     TEST(7, print(" %p %p ", INT_MIN, INT_MAX));
 32:     TEST(8, print(" %p %p ", ULONG_MAX, -ULONG_MAX));
 33:     TEST(9, print(" %p %p ", 0, 0));
-*/
 int	main()
 {
 	printf("/// FT_PRINTF ///\n");
-	int	res = ft_printf(" %p ", LONG_MAX);
+	int	res = ft_printf(" %p ", LONG_MIN);
 	printf("\n");
 	printf("/// OS_PRINTF ///\n");
-	int res2 = printf(" %p ", LONG_MAX);
+	int res2 = printf(" %p ", LONG_MIN);
 	printf("\n");
 
 	printf("ft_printf returns = %d\n", res);
 	printf("OS_printf returns = %d\n", res);
 	
 	return (0);
-}
+}*/
