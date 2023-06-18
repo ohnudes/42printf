@@ -6,7 +6,7 @@
 /*   By: nmaturan <nmaturan@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 17:19:47 by nmaturan          #+#    #+#             */
-/*   Updated: 2023/06/18 16:18:55 by nmaturan         ###   ########.fr       */
+/*   Updated: 2023/06/18 16:37:20 by nmaturan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,20 @@ int	ft_printf(const char *str, ...)
 	if (total.check == -1)
 		return (-1);
 	return (total.len);
+}
+
+int	main(void)
+{
+	int	res;
+	int	res2;
+
+	res = ft_printf("%s", (char *)NULL);
+	printf("\n");
+	res2 = printf("%s", (char *)NULL);
+	printf("\n");
+	printf("diff ft_printf / os_printf\n%d  || %d", res, res2);
+	printf("\n");
+	return (0);
 }
 /*
 int	main()

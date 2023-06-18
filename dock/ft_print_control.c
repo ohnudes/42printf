@@ -6,7 +6,7 @@
 /*   By: nmaturan <nmaturan@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 22:21:37 by nmaturan          #+#    #+#             */
-/*   Updated: 2023/06/18 14:12:03 by nmaturan         ###   ########.fr       */
+/*   Updated: 2023/06/18 16:51:34 by nmaturan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@ void	ft_putstr(t_lc *total, char	*s)
 {
 	int	i;
 
-	i = 0;
-	if (!s)
+	if (!s || s == NULL)
 		ft_putstr(&*total, "(null)");
-	while (i < 5 && s[i] != '\0' && total->check != -1)
+	i = 0;
+	while (s[i] != '\0' && total->check != -1)
 	{
 		ft_putchar(&*total, s[i]);
 		i++;
