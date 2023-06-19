@@ -6,7 +6,7 @@
 #    By: nmaturan <nmaturan@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/13 19:22:53 by nmaturan          #+#    #+#              #
-#    Updated: 2023/06/19 16:41:56 by nmaturan         ###   ########.fr        #
+#    Updated: 2023/06/19 17:37:40 by nmaturan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,22 +29,21 @@ SRC = ft_printf.c ft_printf_utils.c ft_print_control.c
 OBJ = $(SRC:.c=.o)
 
 #### LIBFT
-LFTDIR = libft/
+LIBFT_DIR = libft/
 LIBFT = libft.a
 
 #### Compilacion del programa ####
 
-all: $(NAME) 
+all: $(NAME)
 
-$(NAME): $(OBJ) $(LFTDIR)$(LIBFT)
+$(NAME): $(OBJ) $(LIBFT_DIR)$(LIBFT)
 	@echo Creating library...
-	@cp $(LFTDIR)$(LIBFT) $(NAME)
-	@$(LNK) $@ $(OBJ)
+	@$(LNK) $@ $(OBJ) $(LIBFT_DIR)$(LIBFT)
 	@echo Library completed.
 
-$(LFTDIR)$(LIBFT): $(LIBFTDIR)Makefile
+$(LIBFT_DIR)$(LIBFT): $(LIBFTDIR)Makefile
 	@echo Compiling LIBFT...
-	make -C ./$(LFTDIR)
+	make -C ./$(LIBFT_DIR)
 	@echo LIBFT compiled
 
 %.o: %.c $(INC)
@@ -56,7 +55,7 @@ fclean: clean
 	@rm -f $(NAME)
 
 clean:
-	@make -C $(LFTDIR) fclean
+	@make -C $(LIBFT_DIR) fclean
 	@rm -f $(OBJ)
 
 re: fclean all

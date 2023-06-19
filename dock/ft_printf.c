@@ -6,7 +6,7 @@
 /*   By: nmaturan <nmaturan@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 17:19:47 by nmaturan          #+#    #+#             */
-/*   Updated: 2023/06/19 14:58:18 by nmaturan         ###   ########.fr       */
+/*   Updated: 2023/06/19 17:01:02 by nmaturan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,19 +58,22 @@ int	ft_printf(const char *str, ...)
 		return (-1);
 	return (total.len);
 }
-/*
+
+#include <stdio.h>
+
 int	main()
 {
-	printf("/// FT_PRINTF ///\n");
-	int	res = ft_printf("%d", 10);
-	printf("\n");
-
-	printf("/// OS_PRINTF ///\n");
-	int res2 = printf("%d", 10);
-	printf("\n");
-
-	printf("ft_printf returns = %d\n", res);
-	printf("OS_printf returns = %d\n", res2);
+//printf("/// FT_PRINTF ///\n");
+	int	res = printf(0);
+	printf("%d\n",res);
+//	printf("\n");
+//
+//	printf("/// OS_PRINTF ///\n");
+	//printf(0);
+//	printf("\n");
+//
+////	printf("ft_printf returns = %d\n", res);
+//	printf("OS_printf returns = %d\n", res2);
 	
 	return (0);
-}*/
+}
