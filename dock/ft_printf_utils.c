@@ -6,7 +6,7 @@
 /*   By: nmaturan <nmaturan@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 11:57:39 by nmaturan          #+#    #+#             */
-/*   Updated: 2023/06/18 22:02:54 by nmaturan         ###   ########.fr       */
+/*   Updated: 2023/06/19 11:29:29 by nmaturan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_putptr(t_lc *total, void *p)
 {
-	unsigned int	cp;
+	unsigned long	cp;
 
 	cp = (unsigned long) p;
 	if (!p)
@@ -39,16 +39,15 @@ void	ft_putint(t_lc *total, int i)
 	}
 	if (i / 10 && total->check != -1)
 		ft_putint(&*total, i / 10);
-	ft_putchar(&*total, i % 10);
+	ft_putchar(&*total, (i % 10) + '0');
 }
 
 void	ft_putuint(t_lc *total, unsigned int u)
 {
 	if (u / 10)
 		ft_putuint(&*total, u / 10);
-	if (total->check == -1)
-		return ;
-	ft_putchar(&*total, u % 10);
+	if (total->check != -1)
+		ft_putchar(&*total, (u % 10) + '0');
 }
 
 void	ft_put_l_hex(t_lc *total, unsigned int x)
@@ -62,7 +61,7 @@ void	ft_put_l_hex(t_lc *total, unsigned int x)
 void	ft_put_u_hex(t_lc *total, unsigned int X)
 {
 	if (X / 16)
-		ft_put_l_hex(&*total, X / 16);
+		ft_put_u_hex(&*total, X / 16);
 	if (total->check != -1)
 		ft_putchar(&*total, "0123456789ABCDEF"[X % 16]);
 }
