@@ -6,7 +6,7 @@
 /*   By: nmaturan <nmaturan@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 11:57:39 by nmaturan          #+#    #+#             */
-/*   Updated: 2023/06/19 11:29:29 by nmaturan         ###   ########.fr       */
+/*   Updated: 2023/06/19 13:36:24 by nmaturan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	ft_putptr(t_lc *total, void *p)
 {
-	unsigned long	cp;
+	intptr_t	cp;
 
-	cp = (unsigned long) p;
+	cp = (intptr_t) p;
 	if (!p)
 		ft_putstr(&*total, "0x0");
 	else
