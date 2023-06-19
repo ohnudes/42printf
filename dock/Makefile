@@ -6,7 +6,7 @@
 #    By: nmaturan <nmaturan@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/13 19:22:53 by nmaturan          #+#    #+#              #
-#    Updated: 2023/06/19 16:29:28 by nmaturan         ###   ########.fr        #
+#    Updated: 2023/06/19 16:41:56 by nmaturan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,31 +29,34 @@ SRC = ft_printf.c ft_printf_utils.c ft_print_control.c
 OBJ = $(SRC:.c=.o)
 
 #### LIBFT
-# libft
-LIBFT = libft.a
-
-# path
 LFTDIR = libft/
+LIBFT = libft.a
 
 #### Compilacion del programa ####
 
 all: $(NAME) 
 
 $(NAME): $(OBJ) $(LFTDIR)$(LIBFT)
-	cp $(LFTDIR)$(LIBFT) $(NAME)
-	$(LNK) $@ $(OBJ)
+	@echo Creating library...
+	@cp $(LFTDIR)$(LIBFT) $(NAME)
+	@$(LNK) $@ $(OBJ)
+	@echo Library completed.
 
 $(LFTDIR)$(LIBFT): $(LIBFTDIR)Makefile
+	@echo Compiling LIBFT...
 	make -C ./$(LFTDIR)
+	@echo LIBFT compiled
 
 %.o: %.c $(INC)
-	gcc -c $(FLAGS) $< -o $@  
+	@echo Compiling ft_printf sources into .o
+	@gcc -c $(FLAGS) $< -o $@  
+	@echo Compilation finished
 
 fclean: clean
-	@make -C $(LFTDIR) fclean
 	@rm -f $(NAME)
 
 clean:
+	@make -C $(LFTDIR) fclean
 	@rm -f $(OBJ)
 
 re: fclean all
