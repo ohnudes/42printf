@@ -6,7 +6,7 @@
 #    By: nmaturan <nmaturan@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/13 19:22:53 by nmaturan          #+#    #+#              #
-#    Updated: 2023/06/19 14:43:05 by nmaturan         ###   ########.fr        #
+#    Updated: 2023/06/19 16:29:28 by nmaturan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,21 +26,32 @@ INC = ft_printf.h
 SRC = ft_printf.c ft_printf_utils.c ft_print_control.c
 
 # Objects
-
 OBJ = $(SRC:.c=.o)
+
+#### LIBFT
+# libft
+LIBFT = libft.a
+
+# path
+LFTDIR = libft/
 
 #### Compilacion del programa ####
 
-all: $(NAME)
+all: $(NAME) 
 
-$(NAME): $(OBJ) 
-	$(LNK) $@ $^ 
+$(NAME): $(OBJ) $(LFTDIR)$(LIBFT)
+	cp $(LFTDIR)$(LIBFT) $(NAME)
+	$(LNK) $@ $(OBJ)
+
+$(LFTDIR)$(LIBFT): $(LIBFTDIR)Makefile
+	make -C ./$(LFTDIR)
 
 %.o: %.c $(INC)
 	gcc -c $(FLAGS) $< -o $@  
 
 fclean: clean
-	@rm -f $(NAME) 
+	@make -C $(LFTDIR) fclean
+	@rm -f $(NAME)
 
 clean:
 	@rm -f $(OBJ)

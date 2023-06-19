@@ -6,7 +6,7 @@
 /*   By: nmaturan <nmaturan@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 17:20:51 by nmaturan          #+#    #+#             */
-/*   Updated: 2023/06/19 14:39:33 by nmaturan         ###   ########.fr       */
+/*   Updated: 2023/06/19 14:54:30 by nmaturan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define FT_PRINTF_H
 
 # include <stdarg.h>
-# include <stdlib.h>
 # include <unistd.h>
 
 typedef struct s_lc
