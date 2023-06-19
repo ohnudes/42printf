@@ -6,7 +6,7 @@
 /*   By: nmaturan <nmaturan@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 17:20:51 by nmaturan          #+#    #+#             */
-/*   Updated: 2023/06/18 21:58:54 by nmaturan         ###   ########.fr       */
+/*   Updated: 2023/06/19 14:39:33 by nmaturan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	ft_putstr(t_lc *total, char *s);
 void	ft_putptr(t_lc *total, void *p);
 void	ft_putint(t_lc *total, int i);
 void	ft_putuint(t_lc *total, unsigned int u);
-void	ft_put_l_hex(t_lc *total, unsigned int x);
-void	ft_put_u_hex(t_lc *total, unsigned int X);
+void	ft_put_l_hex(t_lc *total, unsigned long int x);
+void	ft_put_u_hex(t_lc *total, unsigned long int X);
 
 #endif

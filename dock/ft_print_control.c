@@ -6,7 +6,7 @@
 /*   By: nmaturan <nmaturan@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 22:21:37 by nmaturan          #+#    #+#             */
-/*   Updated: 2023/06/18 20:02:15 by nmaturan         ###   ########.fr       */
+/*   Updated: 2023/06/19 14:38:22 by nmaturan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,9 @@ void	ft_putchar(t_lc *total, int c)
 {
 	int	rvalue;
 
-	rvalue = write(1, &c, 1);
+	rvalue = 0;
+	if (total->check != -1)
+		rvalue = write(1, &c, 1);
 	if (rvalue == -1)
 	{
 		total->check = -1;
@@ -27,6 +29,7 @@ void	ft_putchar(t_lc *total, int c)
 }
 
 void	ft_putstr(t_lc *total, char	*s)
+
 {
 	int	i;
 

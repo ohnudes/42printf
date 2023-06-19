@@ -6,13 +6,11 @@
 /*   By: nmaturan <nmaturan@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 17:19:47 by nmaturan          #+#    #+#             */
-/*   Updated: 2023/06/19 13:34:21 by nmaturan         ###   ########.fr       */
+/*   Updated: 2023/06/19 14:39:26 by nmaturan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <limits.h>
-#include <stdio.h>
 
 int	format_handler(t_lc *total, va_list args, const char format)
 {
@@ -61,19 +59,13 @@ int	ft_printf(const char *str, ...)
 	return (total.len);
 }
 /*
-30:     TEST(6, print(" %p %p ", LONG_MIN, LONG_MAX));
-31:     TEST(7, print(" %p %p ", INT_MIN, INT_MAX));
-32:     TEST(8, print(" %p %p ", ULONG_MAX, -ULONG_MAX));
-33:     TEST(9, print(" %p %p ", 0, 0));
-*/
-/*
 int	main()
 {
 	printf("/// FT_PRINTF ///\n");
-	int	res = ft_printf("%p", 0);
+	int	res = ft_printf("%d", 10);
 	printf("\n");
 	printf("/// OS_PRINTF ///\n");
-	int res2 = printf("%p", 0);
+	int res2 = printf("%d", 10);
 	printf("\n");
 
 	printf("ft_printf returns = %d\n", res);
