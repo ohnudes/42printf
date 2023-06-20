@@ -39,7 +39,7 @@ DEPS = $(addprefix $(LFT_DIR), $(LIBFT))
 all: $(NAME) makecheck
 
 $(NAME): $(OBJ) 
-	@echo Linking objects! Creating library...
+	@echo Creating library: $(NAME)...
 	@make -C $(LFT_DIR)
 	@cp $(LFT_DIR)$(LIBFT) .
 	@mv $(LIBFT) $(NAME)
@@ -47,13 +47,12 @@ $(NAME): $(OBJ)
 	@echo Library completed.
 
 %.o: %.c $(INC)
-	@echo Compiling ft_printf sources into .o
+	@echo Compiling $<...
 	@gcc -c $(FLAGS) $< -o $@  
-	@echo Compilation finished
+	@echo Compilation completed.
 
 makecheck:
 	@make -C $(LFT_DIR)
-	@make -C . $(NAME)
 
 fclean: clean
 	@rm -f $(NAME)
