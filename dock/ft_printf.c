@@ -6,7 +6,7 @@
 /*   By: nmaturan <nmaturan@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 17:19:47 by nmaturan          #+#    #+#             */
-/*   Updated: 2023/06/19 17:01:02 by nmaturan         ###   ########.fr       */
+/*   Updated: 2023/06/20 17:54:05 by nmaturan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	ft_printf(const char *str, ...)
 		return (-1);
 	return (total.len);
 }
-
+/*
 #include <stdio.h>
 
 int	main()
@@ -76,4 +76,4 @@ int	main()
 //	printf("OS_printf returns = %d\n", res2);
 	
 	return (0);
-}
+}*/

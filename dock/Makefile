@@ -1,3 +1,4 @@
+
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
@@ -6,7 +7,7 @@
 #    By: nmaturan <nmaturan@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/13 19:22:53 by nmaturan          #+#    #+#              #
-#    Updated: 2023/06/19 17:37:40 by nmaturan         ###   ########.fr        #
+#    Updated: 2023/06/20 18:13:08 by nmaturan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +18,7 @@ NAME = libftprintf.a
 FLAGS = -Wall -Wextra -Werror 
 
 # Flags for linking
-LNK = ar rc
+LNK = ar rcs
 
 # Include
 INC = ft_printf.h
@@ -29,35 +30,38 @@ SRC = ft_printf.c ft_printf_utils.c ft_print_control.c
 OBJ = $(SRC:.c=.o)
 
 #### LIBFT
-LIBFT_DIR = libft/
+LFT_DIR = libft/
 LIBFT = libft.a
+DEPS = $(addprefix $(LFT_DIR), $(LIBFT))
 
 #### Compilacion del programa ####
 
-all: $(NAME)
+all: $(NAME) makecheck
 
-$(NAME): $(OBJ) $(LIBFT_DIR)$(LIBFT)
-	@echo Creating library...
-	@$(LNK) $@ $(OBJ) $(LIBFT_DIR)$(LIBFT)
+$(NAME): $(OBJ) 
+	@echo Linking objects! Creating library...
+	@make -C $(LFT_DIR)
+	@cp $(LFT_DIR)$(LIBFT) .
+	@mv $(LIBFT) $(NAME)
+	@$(LNK) $@ $(OBJ)
 	@echo Library completed.
-
-$(LIBFT_DIR)$(LIBFT): $(LIBFTDIR)Makefile
-	@echo Compiling LIBFT...
-	make -C ./$(LIBFT_DIR)
-	@echo LIBFT compiled
 
 %.o: %.c $(INC)
 	@echo Compiling ft_printf sources into .o
 	@gcc -c $(FLAGS) $< -o $@  
 	@echo Compilation finished
 
+makecheck:
+	@make -C $(LFT_DIR)
+	@make -C . $(NAME)
+
 fclean: clean
 	@rm -f $(NAME)
 
 clean:
-	@make -C $(LIBFT_DIR) fclean
+	@make -C $(LFT_DIR) fclean
 	@rm -f $(OBJ)
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re makecheck
