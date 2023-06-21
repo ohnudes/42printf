@@ -6,7 +6,7 @@
 /*   By: nmaturan <nmaturan@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 17:20:51 by nmaturan          #+#    #+#             */
-/*   Updated: 2023/06/19 14:54:30 by nmaturan         ###   ########.fr       */
+/*   Updated: 2023/06/21 14:04:00 by nmaturan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ typedef struct s_lc
 
 int		ft_printf(const char *str, ...);
 int		format_handler(t_lc *total, va_list args, const char format);
-
 void	ft_putchar(t_lc *total, int c);
 void	ft_putstr(t_lc *total, char *s);
+
 void	ft_putptr(t_lc *total, void *p);
 void	ft_putint(t_lc *total, int i);
 void	ft_putuint(t_lc *total, unsigned int u);

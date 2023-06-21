@@ -6,11 +6,45 @@
 /*   By: nmaturan <nmaturan@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 17:19:47 by nmaturan          #+#    #+#             */
-/*   Updated: 2023/06/20 17:54:05 by nmaturan         ###   ########.fr       */
+/*   Updated: 2023/06/21 14:03:17 by nmaturan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+void	ft_putchar(t_lc *total, int c)
+{
+	int	rvalue;
+
+	rvalue = 0;
+	if (total->check != -1)
+		rvalue = write(1, &c, 1);
+	if (rvalue == -1)
+	{
+		total->check = -1;
+		total->len = -1;
+	}
+	else
+		total->len += 1;
+}
+
+void	ft_putstr(t_lc *total, char	*s)
+
+{
+	int	i;
+
+	if (!s || s == NULL)
+	{
+		ft_putstr(&*total, "(null)");
+		return ;
+	}
+	i = 0;
+	while (s[i] != '\0' && total->check != -1)
+	{
+		ft_putchar(&*total, s[i]);
+		i++;
+	}
+}
 
 int	format_handler(t_lc *total, va_list args, const char format)
 {

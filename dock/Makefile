@@ -24,7 +24,7 @@ LNK = ar rcs
 INC = ft_printf.h
 
 # Functions
-SRC = ft_printf.c ft_printf_utils.c ft_print_control.c
+SRC = ft_printf.c ft_printf_utils.c
 
 # Objects
 OBJ = $(SRC:.c=.o)
