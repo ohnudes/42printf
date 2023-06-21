@@ -6,11 +6,12 @@
 /*   By: nmaturan <nmaturan@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 14:07:28 by nmaturan          #+#    #+#             */
-/*   Updated: 2023/06/21 14:07:32 by nmaturan         ###   ########.fr       */
+/*   Updated: 2023/06/21 17:56:04 by nmaturan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include <stdarg.h>
 
 void	ft_putchar(t_lc *total, int c)
 {
@@ -88,6 +89,7 @@ int	ft_printf(const char *str, ...)
 				i++;
 		}
 	}
+	va_end(args);
 	if (total.check == -1)
 		return (-1);
 	return (total.len);
