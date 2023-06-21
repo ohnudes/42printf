@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmaturan <nmaturan@student.42barcelona.co  +#+  +:+       +#+        */
+/*   By: nmaturan <nmaturan@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/14 17:20:51 by nmaturan          #+#    #+#             */
-/*   Updated: 2023/06/21 14:04:00 by nmaturan         ###   ########.fr       */
+/*   Created: 2023/06/21 14:07:50 by nmaturan          #+#    #+#             */
+/*   Updated: 2023/06/21 14:07:52 by nmaturan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
