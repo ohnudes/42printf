@@ -6,7 +6,7 @@
 /*   By: nmaturan <nmaturan@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 14:06:29 by nmaturan          #+#    #+#             */
-/*   Updated: 2023/07/30 18:51:44 by nmaturan         ###   ########.fr       */
+/*   Updated: 2023/07/30 19:03:13 by nmaturan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,16 @@ void	ft_putptr(t_lc *total, void *p)
 	intptr_t	cp;
 
 	cp = (intptr_t) p;
-	if (!p)
-		ft_putstr(total, "0x");
+	if (!cp)
+	{
+		ft_putstr(total, "(nil)");
+		return ;
+	}
 	else
+	{
 		ft_putstr(total, "0x");
-	if (total->len != -1)
 		ft_put_l_hex(total, cp);
+	}
 }
 
 void	ft_putint(t_lc *total, int i)
