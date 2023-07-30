@@ -6,7 +6,7 @@
 /*   By: nmaturan <nmaturan@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 14:07:50 by nmaturan          #+#    #+#             */
-/*   Updated: 2023/06/21 14:07:52 by nmaturan         ###   ########.fr       */
+/*   Updated: 2023/07/30 18:54:39 by nmaturan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 typedef struct s_lc
 {
 	int	len;
-	int	check;
 }		t_lc;
 
 int		ft_printf(const char *str, ...);
