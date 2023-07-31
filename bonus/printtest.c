@@ -6,13 +6,28 @@
 /*   By: nmaturan <nmaturan@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 18:27:24 by nmaturan          #+#    #+#             */
-/*   Updated: 2023/07/30 18:37:23 by nmaturan         ###   ########.fr       */
+/*   Updated: 2023/07/31 18:06:11 by nmaturan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 
 /* conclusion
+
+   FORMAT
+
+	%[+ -0#][num].[num]specifier
+	 |FLAGS|WIDTH|.|PRECISION|SPECIFIER
+
+	 + > ' '
+	 - > 0 > el numero por si solo
+	 PRECISION > WIDTH
+	
+	 WIDTH
+	 si positivo: compensa para cuota indicada por num, antes del specifier
+	 si negativo: compensa para cuota indicada por num, DESPUES del specifier
+
+	 PRECISION 
 
 	para '-', #
 		"left justify"
@@ -57,7 +72,7 @@ int	main(void)
 	result = 0;
 	// -#s, for %all
 	printf("/// PRINTF TEST >> FLAG '-' ///\n");
-	result = printf("pre string, string(-30) = %-30s", "hello world");
+	result = printf("pre string, string(-30) = |%-30s|", "hello world");
 	printf("\nresult = %d\n", result);
 	printf("string(-1) = "); 
 	result = printf("%-1s", "hello world");
@@ -71,17 +86,24 @@ int	main(void)
 	result = printf("%01d", 10);
 	printf(", result = %d\n", result);
 
+	// el '-' tiene prioridad sobre el '0''
+
 	// ., for precision in %d, %f
 	printf("\n/// PRINTF TEST >> FLAG '.'///\n");
-	float	a = 1.1234567;
-	printf("for original variable = %f:\n", a);
-	result = printf("%.3f", a);
+	int	a = 6789;
+	printf("for original variable = %x:\n", a);
+	result = printf("%.8x", a);
 	printf("\nresult = %d\n", result);
+
+	// POST '.'
+	// con %s trunca
+	// con %d / %x extiende con 0s delate, salvo que el numero indicado sea menor que
+	// el total
 
 	// #,
 	printf("\n/// PRINTF TEST >> FLAG '#'///\n");
-	printf("variable without flag = %x\n", 0x2a);
-	result = printf("%#x", 0x2a);
+	printf("variable without flag = %x\n", 42);
+	result = printf("%#x", 42);
 	double	decimal = 3.141592653689793;
 	printf("\nvariable without flag = %f\n", decimal);
 	result = printf("%#f", decimal);
@@ -90,13 +112,22 @@ int	main(void)
 	// ' ', 
 	printf("\n/// PRINTF TEST >> FLAG ' '///\n");
 	printf("original variable = %d\n", 42);
-	result = printf("%+d", 42);
+	result = printf("% d", 42);
 	printf("\nresult = %d\n", result);
 
 	// +, natural sign
 	printf("\n/// PRINTF TEST >> FLAG '+'///\n");
 	printf("original variable = %d\n", 42);
 	result = printf("%+d", 42);
+	printf("\nresult = %d\n", result);
+
+	// '0' tiene prioridad sobre ' '
+
+	// NEW TESTS
+	printf("\n/// PRINTF TEST >> WIDTH / PREC ///\n");
+	result = printf("|%7.5d|", 42);
+	printf("\nresult = %d\n", result);
+	result = printf("|%+-507#12.1d|", 42);
 	printf("\nresult = %d\n", result);
 
 	return (0);
