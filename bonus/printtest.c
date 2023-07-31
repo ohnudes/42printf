@@ -6,7 +6,7 @@
 /*   By: nmaturan <nmaturan@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 18:27:24 by nmaturan          #+#    #+#             */
-/*   Updated: 2023/07/31 18:06:11 by nmaturan         ###   ########.fr       */
+/*   Updated: 2023/07/31 20:02:28 by nmaturan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,16 @@
 	especifica el signo en caso de ser negativo.
 */
 
+int	main(void)
+{
+	int	result;
+
+	result = printf("|%2048.d|\n", 42);
+	printf("result = %d\n", result);
+	return (0);
+}
+
+/*
 int	main(void)
 {
 	int	result;
@@ -132,3 +142,4 @@ int	main(void)
 
 	return (0);
 }
+*/
