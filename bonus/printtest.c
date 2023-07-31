@@ -6,7 +6,7 @@
 /*   By: nmaturan <nmaturan@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 18:27:24 by nmaturan          #+#    #+#             */
-/*   Updated: 2023/07/31 20:09:57 by nmaturan         ###   ########.fr       */
+/*   Updated: 2023/07/31 20:47:43 by nmaturan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int	main(void)
 {
 	int	result;
 
-	result = printf("|%21474836.4f|\n", 42.0);
+	result = printf("|%+#10.4x|\n", 42);
 	printf("result = %d\n", result);
 	return (0);
 }
