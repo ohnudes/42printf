@@ -6,61 +6,28 @@
 /*   By: nmaturan <nmaturan@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 16:16:35 by nmaturan          #+#    #+#             */
-/*   Updated: 2023/07/31 20:46:23 by nmaturan         ###   ########.fr       */
+/*   Updated: 2023/08/02 14:48:44 by nmaturan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-typedef struct	s_argformat
-{
-	int	count;
-	int	s_len;
-	int	sum;
-	int	space;
-	int	dash;
-	int	zero;
-	int	hash;
-	int	width;
-	int	precision;
-}		t_argformat;
-
-char	*ft_strchr(char *str, char set);
-
-void	ft_putchar(int *count, char n)
-{
-	int	wrbytes;
-
-	if (*count == -1)
-		return ;
-	wrbytes = 0;
-	wrbytes = write(1, &n, 1);
-	if (wrbytes == -1)
-	{
-		*count = -1;
-		return ;
-	}
-	else if (wrbytes == 1)
-		*count += 1;
-}
+// returns ptr to end of flags
+char	*check_valid_format(const char *str, t_argformat *total);
 
 int	flag_parser(const char *str, t_argformat *total)
 {
 	size_t	i;
-	char	*specifier;
+	char	*str_end;
 
 	i = 0;
-	specifier = NULL;
-	while (str[i] && !specifier)
-	{
-		specifier = ft_strchr("cspdiuxX%", str[i]);
-		i++;
-	}
-	if (!specifier)
+	str_end = check_valid_format(str, total);
+	if (!str_end || !ft_strchr("cspdiuxX%", *str_end))
 		return (total->count = -1);
+	while (str + i < str_end)
+		i++;
 
-	
-	
+
 }
 
 int	format_handler(t_argformat *total, const char format, va_list args)
