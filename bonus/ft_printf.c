@@ -6,7 +6,7 @@
 /*   By: nmaturan <nmaturan@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 16:16:35 by nmaturan          #+#    #+#             */
-/*   Updated: 2023/08/04 14:09:11 by ohadmin          ###   ########.fr       */
+/*   Updated: 2023/08/04 18:22:56 by nmaturan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,40 +30,7 @@ char	*check_valid_format(const char *str, t_argformat *total)
 		return (NULL);
 }
 
-void	flag_checker(t_argformat *total, const char *str, char *str_end)
-{
-	char	*iterator;
-
-	iterator = str;
-	while (iterator < str_end)
-	{
-		if (*iterator = '+')
-			total->sum = 1;
-		if (*iterator = ' ')
-			total->space = 1;
-		iterator++;
-	}
-}
-
-void	flag_print(t_argformat *total, char *arg)
-{
-	if (total->sum && ft_strchr("pdiuxX", *arg))
-	{
-		if (total->sign > 0)
-			ft_printc(total, '+');
-		if (total->sign < 0)
-			ft_printc(total, '-');
-	}
-	if (!total->sum && total->space && ft_strchr("pdiuxX", *arg))
-	{
-		if (total->sign > 0)
-			ft_printc(total, ' ');
-		if (total->sign < 0)
-			ft_printc(total, '-');
-	}
-}
-
-int	flag_parser(const char *str, t_argformat *total, va_list args)
+int	flag_parser(t_argformat *total, const char *str)
 {
 	size_t	i;
 	char	*str_end;
@@ -74,31 +41,27 @@ int	flag_parser(const char *str, t_argformat *total, va_list args)
 		return (0);
 	if (!str_end)
 		return (total->count = -1);
-	if (format_handler(total, *str_end, args) == -1)
-		return (total->count = -1);
-	flag_checker(total, str, str_end);
-	flag_print(total);
 	return (total->s_len);
 }
 
 int	format_handler(t_argformat *total, const char format, va_list args)
 {
 	if (format == 'c' && total->count != -1)
-	{}
+		ft_printc(total, va_arg(args, int));
 	else if (format == 's' && total->count != -1)
-	{}
+		ft_prints(total, va_arg(args, char *));
 	else if (format == 'p' && total->count != -1)
-	{}
+		ft_printp(total, va_arg(args, void *));
 	else if ((format == 'd' || format == 'i') && total->count != -1)
-	{}
+		ft_printdi(total, va_arg(args, int));
 	else if (format == 'u' && total->count != -1)
-	{}
+		ft_printu(total, va_arg(args, unsigned int));
 	else if (format == 'x' && total->count != -1)
-	{}
+		ft_printx(total, va_arg(args, unsigned int));
 	else if (format == 'X' && total->count != -1)
-	{}
+		ft_printX(total, va_arg(args, unsigned int));
 	else if (format == '%' && total->count != -1)
-	{}
+		ft_printc(total, '%');
 	if (total->count == -1)
 		return (-1);
 	return (0);
@@ -116,17 +79,12 @@ int	ft_printf(const char *str, ...)
 	while (str[i] && total.count != -1)
 	{
 		while (str[i] && str[i] != '%' && total.count != -1)
-			ft_printc(&total.count, str[i++]);
+			ft_printc(&total, str[i++]);
 		if (str[i] == '%' && str[i++] && total.count != -1)
-		{
-			// parser of flags
-			total.s_len = flag_parser(str + i, &total, args);
-			// format_handler with flags
-			if (total.count != -1)
-			{
-				format_handler(&total, str[i + total.s_len], args);
-				i++;
-			}
+			total.s_len = flag_parser(str + i, &total);
+		if (str[i] && total.count != -1)
+			format_handler(&total, str[i + total.s_len], args);
+		i++;
 		}
 	}
 	va_end(args);

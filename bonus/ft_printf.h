@@ -6,7 +6,7 @@
 /*   By: nmaturan <nmaturan@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 16:14:22 by nmaturan          #+#    #+#             */
-/*   Updated: 2023/08/04 14:05:57 by ohadmin          ###   ########.fr       */
+/*   Updated: 2023/08/04 18:27:21 by nmaturan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ typedef struct	s_argformat
 {
 	// ft_printf return
 	int	count;
-	// flag status
-	int	sign;
-	// count of printed pre flag application
+
+	// IF FLAGS DETECTED
+	int	precount;
 	int	s_len;
 
 	// flags indicator
@@ -37,12 +37,18 @@ typedef struct	s_argformat
 }		t_argformat;
 
 int		ft_printf(const char *str, ...);
-int		flag_parser(const char *str, t_argformat *total);
+int		flag_parser(t_argformat *total, const char *str);
 int		format_handler(t_argformat *total, const char format, va_list args);
 char	*check_valid_format(const char *str, t_argformat *total);
 
 // utils
 void	ft_printc(t_argformat *total, char n);
-char	*ft_strchr(char *str, char set);
+void	ft_prints(t_argformat *total, char *s);
+void	ft_printp(t_argformat *total, void *ptr);
+void	ft_printdi(t_argformat *total, int	i);
+void	ft_printu(t_argformat *total, unsigned int u);
+void	ft_printx(t_argformat *total, unsigned int x);
+void	ft_printX(t_argformat *total, unsigned int X);
+char	*ft_strchr(t_argformat *total, char n);
 
 #endif
