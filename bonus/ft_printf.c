@@ -6,28 +6,79 @@
 /*   By: nmaturan <nmaturan@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 16:16:35 by nmaturan          #+#    #+#             */
-/*   Updated: 2023/08/02 14:48:44 by nmaturan         ###   ########.fr       */
+/*   Updated: 2023/08/04 14:09:11 by ohadmin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-// returns ptr to end of flags
-char	*check_valid_format(const char *str, t_argformat *total);
+char	*check_valid_format(const char *str, t_argformat *total)
+{
+	size_t	i;
+	char	*format;
 
-int	flag_parser(const char *str, t_argformat *total)
+	i = 0;
+	format = NULL;
+	while (str[i] && !format)
+	{
+		format = ft_strchr("cspdiuxX", str[i]);
+		if (format)
+			return (format);
+		i++;
+	}
+	if (!format)
+		return (NULL);
+}
+
+void	flag_checker(t_argformat *total, const char *str, char *str_end)
+{
+	char	*iterator;
+
+	iterator = str;
+	while (iterator < str_end)
+	{
+		if (*iterator = '+')
+			total->sum = 1;
+		if (*iterator = ' ')
+			total->space = 1;
+		iterator++;
+	}
+}
+
+void	flag_print(t_argformat *total, char *arg)
+{
+	if (total->sum && ft_strchr("pdiuxX", *arg))
+	{
+		if (total->sign > 0)
+			ft_printc(total, '+');
+		if (total->sign < 0)
+			ft_printc(total, '-');
+	}
+	if (!total->sum && total->space && ft_strchr("pdiuxX", *arg))
+	{
+		if (total->sign > 0)
+			ft_printc(total, ' ');
+		if (total->sign < 0)
+			ft_printc(total, '-');
+	}
+}
+
+int	flag_parser(const char *str, t_argformat *total, va_list args)
 {
 	size_t	i;
 	char	*str_end;
 
 	i = 0;
 	str_end = check_valid_format(str, total);
-	if (!str_end || !ft_strchr("cspdiuxX%", *str_end))
+	if (str_end == (char *) str)
+		return (0);
+	if (!str_end)
 		return (total->count = -1);
-	while (str + i < str_end)
-		i++;
-
-
+	if (format_handler(total, *str_end, args) == -1)
+		return (total->count = -1);
+	flag_checker(total, str, str_end);
+	flag_print(total);
+	return (total->s_len);
 }
 
 int	format_handler(t_argformat *total, const char format, va_list args)
@@ -65,14 +116,17 @@ int	ft_printf(const char *str, ...)
 	while (str[i] && total.count != -1)
 	{
 		while (str[i] && str[i] != '%' && total.count != -1)
-			ft_putchar(&total.count, str[i++]);
+			ft_printc(&total.count, str[i++]);
 		if (str[i] == '%' && str[i++] && total.count != -1)
 		{
 			// parser of flags
-			total.s_len = flag_parser(str + i, &total);
+			total.s_len = flag_parser(str + i, &total, args);
 			// format_handler with flags
-			format_handler(&total, str[i + total.s_len], args);
-			i++;
+			if (total.count != -1)
+			{
+				format_handler(&total, str[i + total.s_len], args);
+				i++;
+			}
 		}
 	}
 	va_end(args);

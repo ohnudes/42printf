@@ -6,7 +6,7 @@
 /*   By: nmaturan <nmaturan@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 16:14:22 by nmaturan          #+#    #+#             */
-/*   Updated: 2023/08/02 14:43:01 by nmaturan         ###   ########.fr       */
+/*   Updated: 2023/08/04 14:05:57 by ohadmin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ typedef struct	s_argformat
 	// ft_printf return
 	int	count;
 	// flag status
-	int	flags;
+	int	sign;
 	// count of printed pre flag application
 	int	s_len;
 
