@@ -6,7 +6,7 @@
 /*   By: nmaturan <nmaturan@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 16:16:35 by nmaturan          #+#    #+#             */
-/*   Updated: 2023/08/04 18:22:56 by nmaturan         ###   ########.fr       */
+/*   Updated: 2023/08/04 20:02:59 by nmaturan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,13 @@
 char	*check_valid_format(const char *str, t_argformat *total)
 {
 	size_t	i;
-	char	*format;
 
 	i = 0;
-	format = NULL;
-	while (str[i] && !format)
-	{
-		format = ft_strchr("cspdiuxX", str[i]);
-		if (format)
-			return (format);
+	while (str[i] && !ft_strchr("cspdiuxX%", str[i]))
 		i++;
-	}
-	if (!format)
+	if (!ft_strchr("cspdiuxX%", str[i]))
 		return (NULL);
+	return ((char *)str + i);
 }
 
 int	flag_parser(t_argformat *total, const char *str)
@@ -44,7 +38,7 @@ int	flag_parser(t_argformat *total, const char *str)
 	return (total->s_len);
 }
 
-int	format_handler(t_argformat *total, const char format, va_list args)
+int	format_handler(t_argformat *total, va_list args, const char format)
 {
 	if (format == 'c' && total->count != -1)
 		ft_printc(total, va_arg(args, int));
@@ -76,16 +70,15 @@ int	ft_printf(const char *str, ...)
 	va_start(args, str);
 	total = (t_argformat){};
 	i = 0;
-	while (str[i] && total.count != -1)
+	while (str[i] && str[i] != '%' && total.count != -1)
 	{
-		while (str[i] && str[i] != '%' && total.count != -1)
-			ft_printc(&total, str[i++]);
+		ft_printc(&total, str[i++]);
 		if (str[i] == '%' && str[i++] && total.count != -1)
-			total.s_len = flag_parser(str + i, &total);
+			total.s_len = flag_parser(&total, str + i);
 		if (str[i] && total.count != -1)
-			format_handler(&total, str[i + total.s_len], args);
+			if (format_handler(&total, args, str[i + total.s_len]) == -1)
+				return (-1);
 		i++;
-		}
 	}
 	va_end(args);
 	return (total.count);
