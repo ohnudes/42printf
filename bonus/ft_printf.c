@@ -6,13 +6,28 @@
 /*   By: nmaturan <nmaturan@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 16:16:35 by nmaturan          #+#    #+#             */
-/*   Updated: 2023/08/04 20:02:59 by nmaturan         ###   ########.fr       */
+/*   Updated: 2023/08/07 19:49:11 by nmaturan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char	*check_valid_format(const char *str, t_argformat *total)
+void	flag_sum_space(const char *str, t_argformat *total)
+{
+	size_t	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == '+')
+			total->sum += 1;
+		if (str[i] == ' ')
+			total->space += 1;
+		i++;
+	}
+}
+
+char	*check_valid_format(const char *str)
 {
 	size_t	i;
 
@@ -24,17 +39,18 @@ char	*check_valid_format(const char *str, t_argformat *total)
 	return ((char *)str + i);
 }
 
+
 int	flag_parser(t_argformat *total, const char *str)
 {
-	size_t	i;
 	char	*str_end;
 
-	i = 0;
-	str_end = check_valid_format(str, total);
+	str_end = NULL;
+	str_end = check_valid_format(str);
 	if (str_end == (char *) str)
 		return (0);
 	if (!str_end)
 		return (total->count = -1);
+	flag_sum_space(str, total);
 	return (total->s_len);
 }
 
@@ -51,9 +67,9 @@ int	format_handler(t_argformat *total, va_list args, const char format)
 	else if (format == 'u' && total->count != -1)
 		ft_printu(total, va_arg(args, unsigned int));
 	else if (format == 'x' && total->count != -1)
-		ft_printx(total, va_arg(args, unsigned int));
+		ft_printx_lc(total, va_arg(args, unsigned int));
 	else if (format == 'X' && total->count != -1)
-		ft_printX(total, va_arg(args, unsigned int));
+		ft_printx_uc(total, va_arg(args, unsigned int));
 	else if (format == '%' && total->count != -1)
 		ft_printc(total, '%');
 	if (total->count == -1)
@@ -70,15 +86,15 @@ int	ft_printf(const char *str, ...)
 	va_start(args, str);
 	total = (t_argformat){};
 	i = 0;
-	while (str[i] && str[i] != '%' && total.count != -1)
+	while (str[i] != '\0' && total.count != -1)
 	{
-		ft_printc(&total, str[i++]);
-		if (str[i] == '%' && str[i++] && total.count != -1)
-			total.s_len = flag_parser(&total, str + i);
-		if (str[i] && total.count != -1)
-			if (format_handler(&total, args, str[i + total.s_len]) == -1)
-				return (-1);
-		i++;
+		while (str[i] && str[i] != '%' && total.count != -1)
+			ft_printc(&total, str[i++]);
+	//	if (str[i] == '%' && str[i++] && total.count != -1)
+	//		total.s_len = flag_parser(&total, str + i);
+		if (str[i] == '%' && total.count != -1)
+			if (format_handler(&total, args, str[++i]) != -1)
+				i++;
 	}
 	va_end(args);
 	return (total.count);

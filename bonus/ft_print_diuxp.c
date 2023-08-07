@@ -6,7 +6,7 @@
 /*   By: nmaturan <nmaturan@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 18:23:45 by nmaturan          #+#    #+#             */
-/*   Updated: 2023/08/04 18:55:01 by nmaturan         ###   ########.fr       */
+/*   Updated: 2023/08/07 19:28:15 by nmaturan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	ft_printx_lc(t_argformat *total, unsigned int x)
 		total->space = 0;
 	}
 	if (x / 16 && total->count != -1)
-		ft_printx(total, x / 16);
+		ft_printx_lc(total, x / 16);
 	if (total->count != -1)
 		ft_printc(total, "0123456789abcdef"[x % 16]);
 }
@@ -83,7 +83,7 @@ void	ft_printx_uc(t_argformat *total, unsigned int x)
 		total->space = 0;
 	}
 	if (x / 16 && total->count != -1)
-		ft_printx(total, x / 16);
+		ft_printx_uc(total, x / 16);
 	if (total->count != -1)
 		ft_printc(total, "0123456789ABCDEF"[x % 16]);
 }
