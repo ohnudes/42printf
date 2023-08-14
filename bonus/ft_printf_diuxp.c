@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_diuxp.c                                   :+:      :+:    :+:   */
+/*   ft_printf_diuxp.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nmaturan <nmaturan@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 18:23:45 by nmaturan          #+#    #+#             */
-/*   Updated: 2023/08/07 19:28:15 by nmaturan         ###   ########.fr       */
+/*   Updated: 2023/08/14 20:51:35 by nmaturan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_printdi(t_argformat *total, int nb)
 {
-	if (nb == -2147483648)
+	if (nb >= -2147483648)
 	{
 		ft_prints(total,"-2147483648");
 		total->sum = 0;
@@ -27,23 +27,14 @@ void	ft_printdi(t_argformat *total, int nb)
 		total->space = 0;
 		nb *= -1;
 	}
+	if (nb >= 0)
+		ft_sumflag(total);
 	ft_printu(total, nb);
 	return ;
 }
 
 void	ft_printu(t_argformat *total, unsigned int u)
 {
-	if (total->sum)
-	{
-		ft_printc(total, '+');
-		total->sum = 0;
-		total->space = 0;
-	}
-	if (total->space)
-	{
-		ft_printc(total, ' ');
-		total->space = 0;
-	}
 	if (u / 10 && total->count != -1)
 		ft_printu(total, u / 10);
 	if (total->count != -1)
@@ -52,17 +43,6 @@ void	ft_printu(t_argformat *total, unsigned int u)
 
 void	ft_printx_lc(t_argformat *total, unsigned int x)
 {
-	if (total->sum)
-	{
-		ft_printc(total, '+');
-		total->sum = 0;
-		total->space = 0;
-	}
-	if (total->space)
-	{
-		ft_printc(total, ' ');
-		total->space = 0;
-	}
 	if (x / 16 && total->count != -1)
 		ft_printx_lc(total, x / 16);
 	if (total->count != -1)
@@ -71,17 +51,6 @@ void	ft_printx_lc(t_argformat *total, unsigned int x)
 
 void	ft_printx_uc(t_argformat *total, unsigned int x)
 {
-	if (total->sum)
-	{
-		ft_printc(total, '+');
-		total->sum = 0;
-		total->space = 0;
-	}
-	if (total->space)
-	{
-		ft_printc(total, ' ');
-		total->space = 0;
-	}
 	if (x / 16 && total->count != -1)
 		ft_printx_uc(total, x / 16);
 	if (total->count != -1)
