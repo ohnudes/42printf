@@ -6,7 +6,7 @@
 /*   By: nmaturan <nmaturan@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 16:16:35 by nmaturan          #+#    #+#             */
-/*   Updated: 2023/08/07 19:49:11 by nmaturan         ###   ########.fr       */
+/*   Updated: 2023/08/14 21:49:14 by nmaturan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,19 +39,28 @@ char	*check_valid_format(const char *str)
 	return ((char *)str + i);
 }
 
-
-int	flag_parser(t_argformat *total, const char *str)
+void	flag_parser(t_argformat *total, va_list args, char *str, char *set)
 {
-	char	*str_end;
+	size_t	i;
 
-	str_end = NULL;
-	str_end = check_valid_format(str);
-	if (str_end == (char *) str)
-		return (0);
-	if (!str_end)
-		return (total->count = -1);
-	flag_sum_space(str, total);
-	return (total->s_len);
+	i = 0;
+	total->s_len = format_handler(total, args, *set);
+	while (str[i] && str + i < set)
+	{
+		if (str[i] == '+')	
+			total->sum = 1;
+		else if (str[i] == ' ')	
+			total->space = 1;
+		else if (str[i] == '-')	
+			total->dash = 1;
+		else if (str[i] == '0')	
+			total->zero = 1;
+		else if (str[i] == '#')	
+			total->hash = 1;
+		else if (str[i] == '.')	
+			total->precision = 1;
+		i++;
+	}
 }
 
 int	format_handler(t_argformat *total, va_list args, const char format)
@@ -74,27 +83,33 @@ int	format_handler(t_argformat *total, va_list args, const char format)
 		ft_printc(total, '%');
 	if (total->count == -1)
 		return (-1);
-	return (0);
+	return (total->count);
 }
 
 int	ft_printf(const char *str, ...)
 {
-	va_list	args;
-	size_t	i;
+	va_list		args;
+	char		*spec;
+	size_t		i;
 	t_argformat	total;
 
 	va_start(args, str);
 	total = (t_argformat){};
+	spec = NULL;
 	i = 0;
 	while (str[i] != '\0' && total.count != -1)
 	{
 		while (str[i] && str[i] != '%' && total.count != -1)
 			ft_printc(&total, str[i++]);
-	//	if (str[i] == '%' && str[i++] && total.count != -1)
-	//		total.s_len = flag_parser(&total, str + i);
-		if (str[i] == '%' && total.count != -1)
-			if (format_handler(&total, args, str[++i]) != -1)
-				i++;
+		if (str[i] == '%')
+		{
+			spec = check_valid_format(&str[i + 1]);
+			if (spec != &str[i + 1] && total.count != -1)
+				flag_parser(&total, args, (char *)str + i, spec);
+			if (spec && total.count != -1)
+				if (format_handler(&total, args, *spec) != -1)
+					i += (spec - (str + i));
+		}
 	}
 	va_end(args);
 	return (total.count);
