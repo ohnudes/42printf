@@ -6,36 +6,23 @@
 /*   By: nmaturan <nmaturan@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 16:16:35 by nmaturan          #+#    #+#             */
-/*   Updated: 2023/08/14 21:49:14 by nmaturan         ###   ########.fr       */
+/*   Updated: 2023/08/16 22:06:26 by nmaturan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	flag_sum_space(const char *str, t_argformat *total)
+char	*check_valid_format(const char *str, int *flags)
 {
 	size_t	i;
 
 	i = 0;
-	while (str[i])
-	{
-		if (str[i] == '+')
-			total->sum += 1;
-		if (str[i] == ' ')
-			total->space += 1;
+	while (str[i] && !ft_strchr("cspdiuxX%\0", str[i]))
 		i++;
-	}
-}
-
-char	*check_valid_format(const char *str)
-{
-	size_t	i;
-
-	i = 0;
-	while (str[i] && !ft_strchr("cspdiuxX%", str[i]))
-		i++;
-	if (!ft_strchr("cspdiuxX%", str[i]))
+	if (!ft_strchr("cspdiuxX%\0", str[i]))
 		return (NULL);
+	if (i != 0)
+		*flags = 1;
 	return ((char *)str + i);
 }
 
@@ -45,6 +32,9 @@ void	flag_parser(t_argformat *total, va_list args, char *str, char *set)
 
 	i = 0;
 	total->s_len = format_handler(total, args, *set);
+	if (total->count == -1)
+		return ;
+	total->flags = 0;
 	while (str[i] && str + i < set)
 	{
 		if (str[i] == '+')	
@@ -88,14 +78,14 @@ int	format_handler(t_argformat *total, va_list args, const char format)
 
 int	ft_printf(const char *str, ...)
 {
-	va_list		args;
-	char		*spec;
-	size_t		i;
 	t_argformat	total;
+	va_list		args;
+	va_list		args_copy;
+	size_t		i;
 
-	va_start(args, str);
 	total = (t_argformat){};
-	spec = NULL;
+	va_start(args, str);
+	va_copy(args_copy, args);
 	i = 0;
 	while (str[i] != '\0' && total.count != -1)
 	{
@@ -103,14 +93,15 @@ int	ft_printf(const char *str, ...)
 			ft_printc(&total, str[i++]);
 		if (str[i] == '%')
 		{
-			spec = check_valid_format(&str[i + 1]);
-			if (spec != &str[i + 1] && total.count != -1)
-				flag_parser(&total, args, (char *)str + i, spec);
-			if (spec && total.count != -1)
-				if (format_handler(&total, args, *spec) != -1)
-					i += (spec - (str + i));
+			total.spec = check_valid_format(&str[i + 1], &total.flags);
+			if (total.spec != &str[i + 1] && total.count != -1)
+				flag_parser(&total, args_copy, (char *)str + i, total.spec);
+			if (total.spec && total.count != -1)
+				if (format_handler(&total, args, *total.spec) != -1)
+					i += 1 + (total.spec - (str + i));
 		}
 	}
 	va_end(args);
+	va_end(args_copy);
 	return (total.count);
 }
