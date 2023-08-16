@@ -6,13 +6,15 @@
 #    By: nmaturan <nmaturan@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/07 19:05:10 by nmaturan          #+#    #+#              #
-#    Updated: 2023/08/14 20:53:44 by nmaturan         ###   ########.fr        #
+#    Updated: 2023/08/16 20:51:10 by nmaturan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = test.a 
 
 FLAGS = -Wall -Wextra -Werror
+
+T_FLAGS = -Wall -Wextra -Werror -g
 
 LNK = ar rcs
 
@@ -34,7 +36,7 @@ $(NAME): $(OBJ)
 
 %.o: %.c $(INC)
 	@echo Compiling $<
-	@gcc -c $(FLAGS) $< -o $@
+	@gcc -c $(T_FLAGS) $< -o $@
 	@echo Compilation complete.
 
 
@@ -48,6 +50,6 @@ re: fclean all
 
 test: re
 	@make clean
-	@gcc $(FLAGS) $(MAIN) $(NAME) -o test.out 
+	@gcc $(T_FLAGS) $(MAIN) $(NAME) -o prog.out
 
 .PHONY: all clean fclean re
