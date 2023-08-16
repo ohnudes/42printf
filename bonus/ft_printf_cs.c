@@ -6,7 +6,7 @@ void	ft_printc(t_argformat *total, char n)
 
 	if (total->count == -1)
 		return ;
-	if (total->precount)
+	if (total->flags)
 	{
 		total->s_len += 1;	
 		return ;
