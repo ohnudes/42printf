@@ -6,7 +6,7 @@
 /*   By: nmaturan <nmaturan@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 19:01:50 by nmaturan          #+#    #+#             */
-/*   Updated: 2023/08/14 20:50:59 by nmaturan         ###   ########.fr       */
+/*   Updated: 2023/08/16 22:09:55 by nmaturan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,7 @@ int	main(void)
 {
 	// tests
 	//main_spec();
-	//sum_test();
-	int result = printf("%+d", -1);
-	printf("\nresult = %d\n", result);
+	sum_test();
 	return (0);
 }
 //sum_test(result);
@@ -31,25 +29,23 @@ int	main(void)
 void	sum_test(void)
 {
 	int	result;
-	int	*a;
 
 	result = 0;
-	a = NULL;
 	printf("\n>>SPEC_TEST<<\n\n");
 
-	ft_printf("\n>> %%d <<\n");
+	ft_printf("\n>> %%+d <<\n");
 
-	result = ft_printf("% d", 42);
-	ft_printf("\nft_printf result = %d\n", result);
-	result = printf("% d", 42);
-	printf("\nprintf result = %d\n", result);
+	result = ft_printf("%+d, %+d\n", 42, -42);
+	ft_printf("ft_printf result = %d\n", result - 3);
+	result = printf("%+d, %+d\n", 42, -42);
+	ft_printf("printf result = %d\n", result - 3);
 	
-	ft_printf("\n>> %%i <<\n");
+	ft_printf("\n>> %% i <<\n");
 
-	result = ft_printf("% i", -42);
-	ft_printf("\nft_printf result = %d\n", result);
-	result = printf("% i", -42);
-	printf("\nprintf result = %d\n", result);
+	result = ft_printf("% i, % i\n", 42, -42);
+	ft_printf("ft_printf result = %d\n", result - 1);
+	result = printf("% i, % i\n", 42, -42);
+	ft_printf("printf result = %d\n", result - 1);
 }
 
 void	main_spec(void)
