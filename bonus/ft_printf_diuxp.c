@@ -6,7 +6,7 @@
 /*   By: nmaturan <nmaturan@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 18:23:45 by nmaturan          #+#    #+#             */
-/*   Updated: 2023/08/14 20:51:35 by nmaturan         ###   ########.fr       */
+/*   Updated: 2023/08/16 20:06:32 by nmaturan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_printdi(t_argformat *total, int nb)
 {
-	if (nb >= -2147483648)
+	if (nb == -2147483648)
 	{
 		ft_prints(total,"-2147483648");
 		total->sum = 0;
