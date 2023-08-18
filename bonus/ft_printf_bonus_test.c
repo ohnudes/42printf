@@ -6,7 +6,7 @@
 /*   By: nmaturan <nmaturan@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 19:01:50 by nmaturan          #+#    #+#             */
-/*   Updated: 2023/08/16 22:09:55 by nmaturan         ###   ########.fr       */
+/*   Updated: 2023/08/18 20:36:50 by ohadmin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,33 @@
 
 void	main_spec(void);
 void	sum_test(void);
+void	pad_test(void)
 
 int	main(void)
 {
 	// tests
 	//main_spec();
 	sum_test();
+	pad_test();
 	return (0);
 }
-//sum_test(result);
+
+void	pad_test(void)
+{
+	// c s p d i u x X %
+	int	a;
+
+	a = 0;
+	printf("char = %c, str = %s, ptr = %p\n", 'a', "a", &a);
+	printf("int = %d, int = %i, unsigned int = %u\n", 42, 42, 42);
+	printf("hex =  %x, HEX = %X, %%\n", 42, 42);
+
+	printf(">>PAD_TEST<<\n\n", 42);
+	printf();
+	printf();
+
+}
+
 
 // comparing my printf results with original printf
 void	sum_test(void)
