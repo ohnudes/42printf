@@ -6,7 +6,7 @@
 /*   By: nmaturan <nmaturan@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 19:01:50 by nmaturan          #+#    #+#             */
-/*   Updated: 2023/08/21 10:47:23 by ohadmin          ###   ########.fr       */
+/*   Updated: 2023/08/21 21:12:37 by nmaturan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,17 +26,15 @@ int	main(void)
 	// tests
 	// main_spec();
 	// sum_test();
-	// pad_test();
+	pad_test();
 	// hash_test();
-	ft_printf("%+i\n", 123456);
 	return (0);
 }
 
 void	hash_test(void)
 {
-
 	printf("\n>>HASH_TEST<<\n");
-	printf("'#'\n\n");
+	printf("'#' to -Xx-\n\n");
 
 	printf(">>PRINTF_TESTING<<\n");
 	int result = printf("|%#x|\n", 42);
@@ -65,24 +63,40 @@ void	hash_test(void)
 void	pad_test(void)
 {
 	printf("\n>>PAD_TEST<<\n");
-	printf("'-', '0', '.'\n\n");
+	printf("'-' to all\n");
+	printf("'0', '.' to -diuxX-\n\n");
 
 	printf(">>PRINTF_TESTING<<\n");
 
 	int result = printf("|%+-10d|\n", 42);
-	printf("%%+-10 result = %d\n\n", result - 3);
+	printf("1. %%+-10 result = %d\n\n", result - 3);
 
 	result = printf("|%-10d|\n", 42);
-	printf("%%-10 result = %d\n\n", result - 3);
+	printf("2. %%-10 result = %d\n\n", result - 3);
 
 	result = printf("|%10d|\n", 42);
-	printf("%%10 result = %d\n\n", result - 3);
+	printf("3. %%10 result = %d\n\n", result - 3);
 
 	result = printf("|%010d|\n", 42);
-	printf("%%010 result = %d\n\n", result - 3);
+	printf("4. %%010 result = %d\n\n", result - 3);
 
 	result = printf("|%.10d|\n", 42);
-	printf("%%.10 result = %d\n\n", result - 3);
+	printf("5. %%.10 result = %d\n\n", result - 3);
+
+	result = printf("|%-10.5d|\n", 42);
+	printf("6. %%-10.5 result = %d\n\n", result - 3);
+
+	result = printf("|%10.5d|\n", 42);
+	printf("7. %%10.5 result = %d\n\n", result - 3);
+
+	result = printf("|%-5.10d|\n", 42);
+	printf("8. %%-5.10 result = %d\n\n", result - 3);
+
+	result = printf("|%5.10d|\n", 42);
+	printf("9. %%5.10 result = %d\n\n", result - 3);
+
+	result = printf("|%-.d|\n", 42);
+	printf("10. %%-. result = %d\n\n", result - 3);
 
 	printf(">>FT_TESTING<<\n");
 }

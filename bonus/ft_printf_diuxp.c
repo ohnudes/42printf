@@ -6,7 +6,7 @@
 /*   By: nmaturan <nmaturan@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 18:23:45 by nmaturan          #+#    #+#             */
-/*   Updated: 2023/08/21 10:23:52 by ohadmin          ###   ########.fr       */
+/*   Updated: 2023/08/21 19:22:17 by nmaturan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	ft_printdi(t_argformat *total, int nb)
 	if (nb < 0)
 	{
 		ft_printc(total, '-');
+		total->s_len -= 1;
 		total->sum = 0;
 		total->space = 0;
 		nb *= -1;

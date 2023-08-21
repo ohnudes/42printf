@@ -6,7 +6,7 @@
 /*   By: nmaturan <nmaturan@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 16:14:22 by nmaturan          #+#    #+#             */
-/*   Updated: 2023/08/21 11:08:39 by ohadmin          ###   ########.fr       */
+/*   Updated: 2023/08/21 20:44:22 by nmaturan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,10 @@ typedef struct	s_argformat
 	// width
 	int		dash;
 	int		zero;
-	int		dot;
 	int		width;
+
+	int		dot;
+	int		precission;
 
 	// 0x suffix for x/X
 	int		hash;
@@ -51,7 +53,6 @@ int		format_handler(t_argformat *total, va_list args, const char format);
 
 // utils
 char	*ft_strchr(const char *str, char set);
-int		ft_atoi(char *str);
 void	ft_printc(t_argformat *total, char n);
 void	ft_prints(t_argformat *total, char *s);
 
@@ -64,6 +65,8 @@ void	ft_printx_lc(t_argformat *total, unsigned int x);
 void	ft_printx_uc(t_argformat *total, unsigned int X);
 
 // flag utils
+int		ft_param_len(int *paramenter, char *str);
+int		ft_width_adjust(int *type, int	*s_len, int size, char *str);
 void	ft_sumflag(t_argformat *total);
 void	ft_hashflag(t_argformat *total, char type);
 void	ft_widthflag(t_argformat *total, int *width);

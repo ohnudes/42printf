@@ -6,11 +6,18 @@
 /*   By: nmaturan <nmaturan@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 14:31:07 by nmaturan          #+#    #+#             */
-/*   Updated: 2023/08/21 11:18:25 by ohadmin          ###   ########.fr       */
+/*   Updated: 2023/08/21 21:15:03 by nmaturan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+/*
+void	ft_printpad(t_argformat *total, const char format)
+{
+
+
+}*/
 
 char	*ft_strchr(const char *str, char set)
 {
@@ -27,19 +34,36 @@ char	*ft_strchr(const char *str, char set)
 	return (NULL);
 }
 
-int	ft_width_check(t_argformat *total, char *str)
+int	ft_width_adjust(int	*flag, int *length, int size, char *str)
 {
-	char digits;
+	int	iterator;
+
+	iterator = 1;
+	*flag = iterator;
+	if (size != 0 && str == NULL)
+		*length += size;
+	else if (size == 0 && str != NULL)
+	{
+		if (*(str + 1) > '0' && *(str + 1) <= '9')
+			iterator = ft_param_len(length, str + 1);
+		else
+			*flag = 0;
+	}
+	return (iterator);
+}
+
+int	ft_param_len(int *parameter, char *str)
+{
+	int digits;
 
 	digits = 0;
-	total->width = 0;
 	while ((*str >= '0' && *str <= '9') && digits < 10)
 	{
-		total->width = total->width * 10 + (*str - '0');
+		*parameter = *parameter * 10 + (*str - '0');
 		digits++;
 		str++;
 	}
 	if ((*str >= '0' && *str <= '9') && digits == 10)
-		return (total->count = -1);
+		return (0);
 	return (digits);
 }

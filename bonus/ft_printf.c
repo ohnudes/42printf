@@ -6,7 +6,7 @@
 /*   By: nmaturan <nmaturan@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 16:16:35 by nmaturan          #+#    #+#             */
-/*   Updated: 2023/08/21 11:21:01 by ohadmin          ###   ########.fr       */
+/*   Updated: 2023/08/21 21:08:13 by nmaturan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,35 +29,37 @@ char	*check_valid_format(const char *str, int *flags)
 void	flag_parser(t_argformat *total, va_list args, char *str, char *set)
 {
 	size_t	i;
+	int		err_flag;
 
 	i = 0;
-	format_handler(total, args, *set);
-	if (total->count == -1)
+	err_flag = 0;
+	if (format_handler(total, args, *set) == -1)
 		return ;
 	total->flags = 0;
-	while (str[i] && &str[i] < set)
+	while (str[i] && str + i < set && !err_flag)
 	{
-		if (str[i] > '0' && str[i] <= '9')
-			i += ft_atoi(str + i);
-		else if (str[i] == '+' || str[i] == ' ')	
-		{
-			total->sum = 1;
-			total->space = 1;
-			i++;
-		}
-		else if (str[i] == '-' || str[i] == )	
-			total->dash = 1;
-		else if (str[i] == '0')	
-			total->zero = 1;
+		if (str[i] == '+')	
+			i += ft_width_adjust(&total->sum, &total->s_len, 1, NULL);
+		else if (str[i] == ' ')
+			i += ft_width_adjust(&total->space, &total->s_len, 1, NULL);
 		else if (str[i] == '#')	
-			total->hash = 1;
+			i += ft_width_adjust(&total->hash, &total->s_len, 2, NULL);
+		else if (str[i] == '-')
+			i += ft_width_adjust(&total->dash, &total->width, 0, str + i);
+		else if (str[i] == '0')	
+			i += ft_width_adjust(&total->zero, &total->width, 0, str + i);
 		else if (str[i] == '.')	
-			total->dot = 1;
+			i += ft_width_adjust(&total->dot, &total->precission, 0, str + i);
+		else if (str[i] > '0' && str[i] <= '9')
+			i += ft_param_len(&total->width, str + i);
+		else
+			err_flag++;
 	}
 }
 
 int	format_handler(t_argformat *total, va_list args, const char format)
 {
+	//ft_printpad(total, format);
 	if (format == 'c' && total->count != -1)
 		ft_printc(total, va_arg(args, int));
 	else if (format == 's' && total->count != -1)
@@ -72,6 +74,7 @@ int	format_handler(t_argformat *total, va_list args, const char format)
 		ft_printx(total, format, va_arg(args, unsigned int));
 	else if (format == '%' && total->count != -1)
 		ft_printc(total, '%');
+	//ft_printpad(total, format);
 	if (total->count == -1)
 		return (-1);
 	return (total->count);
