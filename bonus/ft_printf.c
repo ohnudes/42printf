@@ -6,7 +6,7 @@
 /*   By: nmaturan <nmaturan@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 16:16:35 by nmaturan          #+#    #+#             */
-/*   Updated: 2023/08/16 22:06:26 by nmaturan         ###   ########.fr       */
+/*   Updated: 2023/08/21 10:24:08 by ohadmin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	flag_parser(t_argformat *total, va_list args, char *str, char *set)
 		else if (str[i] == '#')	
 			total->hash = 1;
 		else if (str[i] == '.')	
-			total->precision = 1;
+			total->dot = 1;
 		i++;
 	}
 }
@@ -65,10 +65,8 @@ int	format_handler(t_argformat *total, va_list args, const char format)
 		ft_printdi(total, va_arg(args, int));
 	else if (format == 'u' && total->count != -1)
 		ft_printu(total, va_arg(args, unsigned int));
-	else if (format == 'x' && total->count != -1)
-		ft_printx_lc(total, va_arg(args, unsigned int));
-	else if (format == 'X' && total->count != -1)
-		ft_printx_uc(total, va_arg(args, unsigned int));
+	else if ((format == 'x' || format == 'X') && total->count != -1)
+		ft_printx(total, format, va_arg(args, unsigned int));
 	else if (format == '%' && total->count != -1)
 		ft_printc(total, '%');
 	if (total->count == -1)

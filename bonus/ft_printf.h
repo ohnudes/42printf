@@ -6,7 +6,7 @@
 /*   By: nmaturan <nmaturan@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 16:14:22 by nmaturan          #+#    #+#             */
-/*   Updated: 2023/08/16 21:01:01 by nmaturan         ###   ########.fr       */
+/*   Updated: 2023/08/21 10:21:59 by ohadmin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,18 @@ typedef struct	s_argformat
 	int		flags;	// flag used in printc to count for total len.
 	int		s_len;
 
-	// flags indicator
+	// sign
 	int		sum;
 	int		space;
+
+	// width
 	int		dash;
 	int		zero;
-	int		hash;
+	int		dot;
 	int		width;
-	int		precision;
+
+	// 0x suffix for x/X
+	int		hash;
 }			t_argformat;
 
 int		ft_printf(const char *str, ...);
@@ -54,10 +58,13 @@ void	ft_prints(t_argformat *total, char *s);
 void	ft_printp(t_argformat *total, void *ptr);
 void	ft_printdi(t_argformat *total, int	i);
 void	ft_printu(t_argformat *total, unsigned int u);
+void	ft_printx(t_argformat *total, char type, unsigned int x);
 void	ft_printx_lc(t_argformat *total, unsigned int x);
 void	ft_printx_uc(t_argformat *total, unsigned int X);
 
 // flag utils
 void	ft_sumflag(t_argformat *total);
+void	ft_hashflag(t_argformat *total, char type);
+void	ft_widthflag(t_argformat *total, int *width);
 
 #endif

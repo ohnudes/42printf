@@ -6,7 +6,7 @@
 /*   By: nmaturan <nmaturan@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 19:01:50 by nmaturan          #+#    #+#             */
-/*   Updated: 2023/08/18 20:36:50 by ohadmin          ###   ########.fr       */
+/*   Updated: 2023/08/21 10:26:17 by ohadmin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,33 +15,70 @@
 
 void	main_spec(void);
 void	sum_test(void);
-void	pad_test(void)
+void	pad_test(void);
+void	hash_test(void);
+
+// specifiers
+// c s p d i u x X %
 
 int	main(void)
 {
 	// tests
 	//main_spec();
-	sum_test();
-	pad_test();
+	//sum_test();
+//	pad_test();
+	hash_test();
 	return (0);
+}
+
+void	hash_test(void)
+{
+
+	printf("\n>>HASH_TEST<<\n");
+	printf("'#'\n\n");
+
+	printf(">>PRINTF_TESTING<<\n");
+	int result = printf("|%#x|\n", 42);
+	printf("%%#x result = %d\n\n", result - 3);
+
+	result = printf("|%#X|\n", 42);
+	printf("%%#X result = %d\n\n", result - 3);
+
+	printf(">>FT_TESTING<<\n");
+
+	result = ft_printf("|%#x|\n", 42);
+	ft_printf("%%#x result = %d\n\n", result - 3);
+
+	result = ft_printf("|%#X|\n", 42);
+	ft_printf("%%#X result = %d\n\n", result - 3);
 }
 
 void	pad_test(void)
 {
-	// c s p d i u x X %
-	int	a;
+	printf("\n>>PAD_TEST<<\n");
+	printf("'-', '0', '.'\n\n");
 
-	a = 0;
-	printf("char = %c, str = %s, ptr = %p\n", 'a', "a", &a);
-	printf("int = %d, int = %i, unsigned int = %u\n", 42, 42, 42);
-	printf("hex =  %x, HEX = %X, %%\n", 42, 42);
+	int result = printf("|%+-10d|\n", 42);
+	printf("%%+-10 result = %d\n\n", result - 3);
 
-	printf(">>PAD_TEST<<\n\n", 42);
-	printf();
-	printf();
+	result = printf("|%-10d|\n", 42);
+	printf("%%-10 result = %d\n\n", result - 3);
 
+	result = printf("|%10d|\n", 42);
+	printf("%%10 result = %d\n\n", result - 3);
+
+	result = printf("|%010d|\n", 42);
+	printf("%%010 result = %d\n\n", result - 3);
+
+	result = printf("|%.10d|\n", 42);
+	printf("%%.10 result = %d\n\n", result - 3);
+
+	/* the following invalidates the '0'
+	 
+	result = printf("|%-010d|\n", 42);
+	printf("%%-010 result = %d\n\n", result - 3);
+	*/
 }
-
 
 // comparing my printf results with original printf
 void	sum_test(void)

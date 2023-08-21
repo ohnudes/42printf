@@ -6,7 +6,7 @@
 /*   By: nmaturan <nmaturan@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 18:23:45 by nmaturan          #+#    #+#             */
-/*   Updated: 2023/08/16 20:06:32 by nmaturan         ###   ########.fr       */
+/*   Updated: 2023/08/21 10:23:52 by ohadmin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,16 @@ void	ft_printu(t_argformat *total, unsigned int u)
 		ft_printu(total, u / 10);
 	if (total->count != -1)
 		ft_printc(total, (u % 10) + '0');
+}
+
+void	ft_printx(t_argformat *total, char type, unsigned int data)
+{
+	if (total->hash == 1)
+		ft_hashflag(total, type);
+	if (type == 'X')
+		ft_printx_uc(total, data);
+	else if (type == 'x')
+		ft_printx_lc(total, data);
 }
 
 void	ft_printx_lc(t_argformat *total, unsigned int x)
