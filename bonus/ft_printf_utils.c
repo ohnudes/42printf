@@ -6,14 +6,14 @@
 /*   By: nmaturan <nmaturan@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 14:31:07 by nmaturan          #+#    #+#             */
-/*   Updated: 2023/08/21 21:15:03 by nmaturan         ###   ########.fr       */
+/*   Updated: 2023/08/21 21:22:36 by nmaturan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
 /*
-void	ft_printpad(t_argformat *total, const char format)
+void	ft_printpadding(t_argformat *total, const char format)
 {
 
 
