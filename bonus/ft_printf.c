@@ -6,7 +6,7 @@
 /*   By: nmaturan <nmaturan@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 16:16:35 by nmaturan          #+#    #+#             */
-/*   Updated: 2023/08/21 10:24:08 by ohadmin          ###   ########.fr       */
+/*   Updated: 2023/08/21 11:21:01 by ohadmin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,17 +31,21 @@ void	flag_parser(t_argformat *total, va_list args, char *str, char *set)
 	size_t	i;
 
 	i = 0;
-	total->s_len = format_handler(total, args, *set);
+	format_handler(total, args, *set);
 	if (total->count == -1)
 		return ;
 	total->flags = 0;
-	while (str[i] && str + i < set)
+	while (str[i] && &str[i] < set)
 	{
-		if (str[i] == '+')	
+		if (str[i] > '0' && str[i] <= '9')
+			i += ft_atoi(str + i);
+		else if (str[i] == '+' || str[i] == ' ')	
+		{
 			total->sum = 1;
-		else if (str[i] == ' ')	
 			total->space = 1;
-		else if (str[i] == '-')	
+			i++;
+		}
+		else if (str[i] == '-' || str[i] == )	
 			total->dash = 1;
 		else if (str[i] == '0')	
 			total->zero = 1;
@@ -49,7 +53,6 @@ void	flag_parser(t_argformat *total, va_list args, char *str, char *set)
 			total->hash = 1;
 		else if (str[i] == '.')	
 			total->dot = 1;
-		i++;
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: nmaturan <nmaturan@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 19:01:50 by nmaturan          #+#    #+#             */
-/*   Updated: 2023/08/21 10:26:17 by ohadmin          ###   ########.fr       */
+/*   Updated: 2023/08/21 10:47:23 by ohadmin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,11 @@ void	hash_test(void);
 int	main(void)
 {
 	// tests
-	//main_spec();
-	//sum_test();
-//	pad_test();
-	hash_test();
+	// main_spec();
+	// sum_test();
+	// pad_test();
+	// hash_test();
+	ft_printf("%+i\n", 123456);
 	return (0);
 }
 
@@ -53,10 +54,20 @@ void	hash_test(void)
 	ft_printf("%%#X result = %d\n\n", result - 3);
 }
 
+/* PAD_TEST NOTES:
+
+ * the following invalidates the '0'
+
+   result = printf("|%-010d|\n", 42);
+   printf("%%-010 result = %d\n\n", result - 3);
+
+   */
 void	pad_test(void)
 {
 	printf("\n>>PAD_TEST<<\n");
 	printf("'-', '0', '.'\n\n");
+
+	printf(">>PRINTF_TESTING<<\n");
 
 	int result = printf("|%+-10d|\n", 42);
 	printf("%%+-10 result = %d\n\n", result - 3);
@@ -73,11 +84,7 @@ void	pad_test(void)
 	result = printf("|%.10d|\n", 42);
 	printf("%%.10 result = %d\n\n", result - 3);
 
-	/* the following invalidates the '0'
-	 
-	result = printf("|%-010d|\n", 42);
-	printf("%%-010 result = %d\n\n", result - 3);
-	*/
+	printf(">>FT_TESTING<<\n");
 }
 
 // comparing my printf results with original printf

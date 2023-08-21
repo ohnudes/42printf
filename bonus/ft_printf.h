@@ -6,7 +6,7 @@
 /*   By: nmaturan <nmaturan@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 16:14:22 by nmaturan          #+#    #+#             */
-/*   Updated: 2023/08/21 10:21:59 by ohadmin          ###   ########.fr       */
+/*   Updated: 2023/08/21 11:08:39 by ohadmin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ int		format_handler(t_argformat *total, va_list args, const char format);
 
 // utils
 char	*ft_strchr(const char *str, char set);
+int		ft_atoi(char *str);
 void	ft_printc(t_argformat *total, char n);
 void	ft_prints(t_argformat *total, char *s);
 
