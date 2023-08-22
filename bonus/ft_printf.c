@@ -6,55 +6,67 @@
 /*   By: nmaturan <nmaturan@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 16:16:35 by nmaturan          #+#    #+#             */
-/*   Updated: 2023/08/21 21:23:32 by nmaturan         ###   ########.fr       */
+/*   Updated: 2023/08/22 19:14:38 by nmaturan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char	*check_valid_format(const char *str, int *flags)
+// looks for specifier as %d, %c, etc... and then calculates the argument lenght
+char	*check_valid_format(t_argformat *total, va_list args, const char *str)
 {
+	char	*ref;
+	int		arg_len;
 	size_t	i;
 
 	i = 0;
-	while (str[i] && !ft_strchr("cspdiuxX%\0", str[i]))
+	arg_len = 0;
+	ref = NULL;
+	if (*str)
+		ref = (char*) str;
+	while (ref[i] && !ft_strchr("cspdiuxX%\0", ref[i]))
 		i++;
-	if (!ft_strchr("cspdiuxX%\0", str[i]))
+	if (ref && !ft_strchr("cspdiuxX%\0", ref[i]))
 		return (NULL);
-	if (i != 0)
-		*flags = 1;
-	return ((char *)str + i);
+	if (ref && i != 0)
+	{
+		total->flags = 1;
+		arg_len = format_handler(total, args, *(ref + i));
+		if (arg_len != -1)
+			total->flags = 0;
+	}
+	return (ref + i);
 }
 
-void	flag_parser(t_argformat *total, va_list args, char *str, char *set)
+int	flag_parser(t_argformat *total, char *str)
 {
 	size_t	i;
-	int		err_flag;
+	size_t	j;
 
 	i = 0;
-	err_flag = 0;
-	if (format_handler(total, args, *set) == -1)
-		return ;
-	total->flags = 0;
-	while (str[i] && str + i < set && !err_flag)
+	j = 0;
+	while (str[i] && str + i < total->spec && total->flags == 0)
 	{
-		if (str[i] == '+')	
-			i += ft_width_adjust(&total->sum, &total->s_len, 1, NULL);
+		if (str[i] == '+')
+			j = ft_width_adjust(&total->sum, &total->s_len, 1, NULL);
 		else if (str[i] == ' ')
-			i += ft_width_adjust(&total->space, &total->s_len, 1, NULL);
-		else if (str[i] == '#')	
-			i += ft_width_adjust(&total->hash, &total->s_len, 2, NULL);
+			j = ft_width_adjust(&total->space, &total->s_len, 1, NULL);
+		else if (str[i] == '#')
+			j = ft_width_adjust(&total->hash, &total->s_len, 2, NULL);
 		else if (str[i] == '-')
-			i += ft_width_adjust(&total->dash, &total->width, 0, str + i);
-		else if (str[i] == '0')	
-			i += ft_width_adjust(&total->zero, &total->width, 0, str + i);
-		else if (str[i] == '.')	
-			i += ft_width_adjust(&total->dot, &total->precission, 0, str + i);
-		else if (str[i] > '0' && str[i] <= '9')
-			i += ft_param_len(&total->width, str + i);
+			j = ft_width_adjust(&total->dash, &total->width, 0, str + i);
+		else if (str[i] == '0')
+			j = ft_width_adjust(&total->zero, &total->width, 0, str + i);
+		else if (str[i] == '.')
+			j = ft_width_adjust(&total->dot, &total->precission, 0, str + i);
+		else if (ft_isnum(str[i]))
+			j = ft_param_len(&total->width, str + i);
+		if (j <= 7)
+			i += j;
 		else
-			err_flag++;
+			return (total->count = -1);
 	}
+	return (1);
 }
 
 int	format_handler(t_argformat *total, va_list args, const char format)
@@ -95,11 +107,11 @@ int	ft_printf(const char *str, ...)
 	{
 		while (str[i] && str[i] != '%' && total.count != -1)
 			ft_printc(&total, str[i++]);
-		if (str[i] == '%')
+		if (str[i] == '%' && total.count != -1)
 		{
-			total.spec = check_valid_format(&str[i + 1], &total.flags);
+			total.spec = check_valid_format(&total, args_copy, &str[i + 1]);
 			if (total.spec != &str[i + 1] && total.count != -1)
-				flag_parser(&total, args_copy, (char *)str + i, total.spec);
+				flag_parser(&total, (char *)str + i);
 			if (total.spec && total.count != -1)
 				if (format_handler(&total, args, *total.spec) != -1)
 					i += 1 + (total.spec - (str + i));

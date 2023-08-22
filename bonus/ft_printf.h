@@ -6,7 +6,7 @@
 /*   By: nmaturan <nmaturan@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 16:14:22 by nmaturan          #+#    #+#             */
-/*   Updated: 2023/08/21 20:44:22 by nmaturan         ###   ########.fr       */
+/*   Updated: 2023/08/22 19:08:26 by nmaturan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,15 @@ typedef struct	s_argformat
 int		ft_printf(const char *str, ...);
 
 // checking for flags
-void	flag_parser(t_argformat *total, va_list args, char *start, char *set);
-char	*check_valid_format(const char *str, int *flags);
+int		flag_parser(t_argformat *total, char *start);
+char	*check_valid_format(t_argformat *total, va_list args, const char *str);
 
 // no flags
 int		format_handler(t_argformat *total, va_list args, const char format);
 
 // utils
 char	*ft_strchr(const char *str, char set);
+int		ft_isnum(char n);
 void	ft_printc(t_argformat *total, char n);
 void	ft_prints(t_argformat *total, char *s);
 

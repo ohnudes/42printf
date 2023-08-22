@@ -6,18 +6,22 @@
 /*   By: nmaturan <nmaturan@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 14:31:07 by nmaturan          #+#    #+#             */
-/*   Updated: 2023/08/21 21:22:36 by nmaturan         ###   ########.fr       */
+/*   Updated: 2023/08/22 19:12:01 by nmaturan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-/*
 void	ft_printpadding(t_argformat *total, const char format)
 {
 
 
-}*/
+}
+
+int	ft_isnum(char n)
+{
+	return ((n > 0) && (n <= 9));
+}
 
 char	*ft_strchr(const char *str, char set)
 {
@@ -44,7 +48,7 @@ int	ft_width_adjust(int	*flag, int *length, int size, char *str)
 		*length += size;
 	else if (size == 0 && str != NULL)
 	{
-		if (*(str + 1) > '0' && *(str + 1) <= '9')
+		if (ft_isnum(*(str + 1)))
 			iterator = ft_param_len(length, str + 1);
 		else
 			*flag = 0;
@@ -52,18 +56,21 @@ int	ft_width_adjust(int	*flag, int *length, int size, char *str)
 	return (iterator);
 }
 
+// digits returns 8 digits at most (i'll sugest even 7). While the original printf does allow
+// for almost INT_MAX32 without throwing a warning, the result seems
+// undefined behavior. The function doesn't control the MAX_DIGIT since the
+// return is used to iterate. The control will be done at flag_parser and 
+// ft_width_adjust
 int	ft_param_len(int *parameter, char *str)
 {
 	int digits;
 
 	digits = 0;
-	while ((*str >= '0' && *str <= '9') && digits < 10)
+	while (*str >= '0' && *str <= '9' && *str != '\0')
 	{
 		*parameter = *parameter * 10 + (*str - '0');
 		digits++;
 		str++;
 	}
-	if ((*str >= '0' && *str <= '9') && digits == 10)
-		return (0);
 	return (digits);
 }
