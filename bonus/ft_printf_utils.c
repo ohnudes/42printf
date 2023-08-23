@@ -6,21 +6,17 @@
 /*   By: nmaturan <nmaturan@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 14:31:07 by nmaturan          #+#    #+#             */
-/*   Updated: 2023/08/22 19:12:01 by nmaturan         ###   ########.fr       */
+/*   Updated: 2023/08/23 11:10:26 by ohadmin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_printpadding(t_argformat *total, const char format)
-{
-
-
-}
-
 int	ft_isnum(char n)
 {
-	return ((n > 0) && (n <= 9));
+	if ((n > 0) && (n <= 9))
+		return (1);
+	return (0);
 }
 
 char	*ft_strchr(const char *str, char set)

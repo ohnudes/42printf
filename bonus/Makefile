@@ -6,7 +6,7 @@
 #    By: nmaturan <nmaturan@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/07 19:05:10 by nmaturan          #+#    #+#              #
-#    Updated: 2023/08/16 20:51:10 by nmaturan         ###   ########.fr        #
+#    Updated: 2023/08/23 12:29:17 by ohadmin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,8 +20,8 @@ LNK = ar rcs
 
 INC = ft_printf.h
 
-SRC = ft_printf.c ft_printf_utils.c ft_printf_diuxp.c ft_printf_cs.c \
-	  ft_flags.c
+SRC = ft_printf.c ft_printf_utils.c ft_printf_diuxp.c ft_printf_print.c \
+	  ft_flags_utils.c
 
 OBJ = $(SRC:.c=.o)
 

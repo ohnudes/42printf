@@ -6,7 +6,7 @@
 /*   By: nmaturan <nmaturan@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 16:14:22 by nmaturan          #+#    #+#             */
-/*   Updated: 2023/08/22 19:08:26 by nmaturan         ###   ########.fr       */
+/*   Updated: 2023/08/23 12:31:26 by ohadmin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,11 @@ typedef struct	s_argformat
 	int		dash;
 	int		zero;
 	int		width;
+	int		rwidth;
 
 	int		dot;
 	int		precission;
+	int		truncate;
 
 	// 0x suffix for x/X
 	int		hash;
@@ -51,11 +53,12 @@ char	*check_valid_format(t_argformat *total, va_list args, const char *str);
 // no flags
 int		format_handler(t_argformat *total, va_list args, const char format);
 
-// utils
-char	*ft_strchr(const char *str, char set);
-int		ft_isnum(char n);
+// print utils
 void	ft_printc(t_argformat *total, char n);
 void	ft_prints(t_argformat *total, char *s);
+void	ft_printprefix(t_argformat *total);
+void	ft_printsuffix(t_argformat *total);
+
 
 // print format
 void	ft_printp(t_argformat *total, void *ptr);
@@ -65,9 +68,14 @@ void	ft_printx(t_argformat *total, char type, unsigned int x);
 void	ft_printx_lc(t_argformat *total, unsigned int x);
 void	ft_printx_uc(t_argformat *total, unsigned int X);
 
-// flag utils
+// utils
+char	*ft_strchr(const char *str, char set);
+int		ft_isnum(char n);
 int		ft_param_len(int *paramenter, char *str);
 int		ft_width_adjust(int *type, int	*s_len, int size, char *str);
+
+// flag utils
+void	ft_flagvalidation(t_argformat *total, const char format);
 void	ft_sumflag(t_argformat *total);
 void	ft_hashflag(t_argformat *total, char type);
 void	ft_widthflag(t_argformat *total, int *width);

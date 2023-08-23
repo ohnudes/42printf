@@ -6,7 +6,7 @@
 /*   By: nmaturan <nmaturan@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 16:16:35 by nmaturan          #+#    #+#             */
-/*   Updated: 2023/08/22 19:14:38 by nmaturan         ###   ########.fr       */
+/*   Updated: 2023/08/23 12:32:26 by ohadmin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,9 @@ int	flag_parser(t_argformat *total, char *str)
 	size_t	j;
 
 	i = 0;
-	j = 0;
 	while (str[i] && str + i < total->spec && total->flags == 0)
 	{
+		j = 0;
 		if (str[i] == '+')
 			j = ft_width_adjust(&total->sum, &total->s_len, 1, NULL);
 		else if (str[i] == ' ')
@@ -54,14 +54,14 @@ int	flag_parser(t_argformat *total, char *str)
 		else if (str[i] == '#')
 			j = ft_width_adjust(&total->hash, &total->s_len, 2, NULL);
 		else if (str[i] == '-')
-			j = ft_width_adjust(&total->dash, &total->width, 0, str + i);
-		else if (str[i] == '0')
+			j = ft_width_adjust(&total->dash, &total->rwidth, 0, str + i);
+		else if (str[i] == '0' && ft_strchr("diuxX", str[i]))
 			j = ft_width_adjust(&total->zero, &total->width, 0, str + i);
-		else if (str[i] == '.')
-			j = ft_width_adjust(&total->dot, &total->precission, 0, str + i);
+		else if (str[i] == '.' && ft_strchr("diuxX", str[i]))
+			j = ft_width_adjust(&total->dot, &total->width, 0, str + i);
 		else if (ft_isnum(str[i]))
 			j = ft_param_len(&total->width, str + i);
-		if (j <= 7)
+		if (j <= 7 && j > 0)
 			i += j;
 		else
 			return (total->count = -1);
@@ -71,7 +71,8 @@ int	flag_parser(t_argformat *total, char *str)
 
 int	format_handler(t_argformat *total, va_list args, const char format)
 {
-	//ft_printpad(total, format);
+	ft_flagvalidation(total, format);
+	ft_printprefix(total);
 	if (format == 'c' && total->count != -1)
 		ft_printc(total, va_arg(args, int));
 	else if (format == 's' && total->count != -1)
@@ -86,7 +87,8 @@ int	format_handler(t_argformat *total, va_list args, const char format)
 		ft_printx(total, format, va_arg(args, unsigned int));
 	else if (format == '%' && total->count != -1)
 		ft_printc(total, '%');
-	//ft_printpad(total, format);
+	if (total->count != -1)
+		ft_printsuffix(total);
 	if (total->count == -1)
 		return (-1);
 	return (total->count);
