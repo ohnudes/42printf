@@ -6,7 +6,7 @@
 /*   By: nmaturan <nmaturan@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 19:01:50 by nmaturan          #+#    #+#             */
-/*   Updated: 2023/08/23 12:33:12 by ohadmin          ###   ########.fr       */
+/*   Updated: 2023/08/26 20:44:55 by nmaturan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,32 @@ int	main(void)
 {
 	// tests
 	// main_spec();
-	// sum_test();
+	//sum_test();
 	// pad_test();
 	// hash_test();
+
+	int	result;
+
+	result = 0;
+	printf("Minimized sum test\n");
+
+	ft_printf("\n>> %%+d <<\n");
+
+	result = ft_printf("%+d\n", 42);
+	ft_printf("ft_printf result = %d\n", result - 3);
+
+	/*
+
+	   result = printf("%+d, %+d\n", 42, -42);
+	   ft_printf("printf result = %d\n", result - 3);
+	ft_printf("\n>> %% i <<\n");
+
+	result = ft_printf("% i, % i\n", 42, -42);
+	ft_printf("ft_printf result = %d\n", result - 3);
+	result = printf("% i, % i\n", 42, -42);
+	ft_printf("printf result = %d\n", result - 3);
 	return (0);
+	*/
 }
 
 void	hash_test(void)
@@ -134,7 +156,7 @@ void	sum_test(void)
 	int	result;
 
 	result = 0;
-	printf("\n>>SPEC_TEST<<\n\n");
+	printf("\n>>SUM_TEST<<\n\n");
 
 	ft_printf("\n>> %%+d <<\n");
 
@@ -146,9 +168,9 @@ void	sum_test(void)
 	ft_printf("\n>> %% i <<\n");
 
 	result = ft_printf("% i, % i\n", 42, -42);
-	ft_printf("ft_printf result = %d\n", result - 1);
+	ft_printf("ft_printf result = %d\n", result - 3);
 	result = printf("% i, % i\n", 42, -42);
-	ft_printf("printf result = %d\n", result - 1);
+	ft_printf("printf result = %d\n", result - 3);
 }
 
 void	main_spec(void)
@@ -162,58 +184,58 @@ void	main_spec(void)
 
 	ft_printf("\n>> %%d <<\n");
 
-	result = ft_printf("%d", 42);
-	ft_printf("\nft_printf result = %d\n", result);
-	result = printf("%d", 42);
-	printf("\nprintf result = %d\n", result);
+	result = ft_printf("%d\n", 42);
+	ft_printf("ft_printf result = %d\n", result - 1);
+	result = printf("%d\n", 42);
+	printf("printf result = %d\n", result - 1);
 	
 	ft_printf("\n>> %%i <<\n");
 
-	result = ft_printf("%i", -42);
-	ft_printf("\nft_printf result = %d\n", result);
-	result = printf("%i", -42);
-	printf("\nprintf result = %d\n", result);
+	result = ft_printf("%i\n", -42);
+	ft_printf("ft_printf result = %d\n", result - 1);
+	result = printf("%i\n", -42);
+	printf("printf result = %d\n", result - 1);
 
 	ft_printf("\n>> %%p <<\n");
 
-	result = ft_printf("%p", a);
-	ft_printf(" ft_printf result = %d\n", result);
-	result = printf("%p", a);
-	ft_printf(" printf result = %d\n", result);
+	result = ft_printf("%p\n", a);
+	ft_printf("ft_printf result = %d\n", result - 1);
+	result = printf("%p\n", a);
+	ft_printf("printf result = %d\n", result - 1);
 
 	ft_printf("\n>> %%c <<\n");
 
-	result = ft_printf("%c", '@');
-	ft_printf("\nft_printf result = %d\n", result);
-	result = printf("%c", '@');
-	printf("\nprintf result = %d\n", result);
+	result = ft_printf("%c\n", '@');
+	ft_printf("ft_printf result = %d\n", result - 1);
+	result = printf("%c\n", '@');
+	printf("printf result = %d\n", result - 1);
 	
 	ft_printf("\n\n");
 
-	result = ft_printf("%s", "Ayyy lmaooOOo");
-	ft_printf("\nft_printf result = %d\n", result);
-	result = printf("%s", "Ayyy lmaooOOo");
-	printf("\nprintf result = %d\n", result);
+	result = ft_printf("%s\n", "Ayyy lmaooOOo");
+	ft_printf("ft_printf result = %d\n", result - 1);
+	result = printf("%s\n", "Ayyy lmaooOOo");
+	printf("printf result = %d\n", result - 1);
 
 	ft_printf("\n\n");
 
-	result = ft_printf("%u", 2147483647);
-	ft_printf("\nft_printf result = %d\n", result);
-	result = printf("%u", 2147483647);
-	ft_printf("\nprintf result = %d\n", result);
+	result = ft_printf("%u\n", 2147483647);
+	ft_printf("ft_printf result = %d\n", result - 1);
+	result = printf("%u\n", 2147483647);
+	ft_printf("printf result = %d\n", result - 1);
 
 	ft_printf("\n\n");
 
-	result = ft_printf("%x", 123456);
-	ft_printf("\nft_printf result = %d\n", result);
-	result = printf("%x", 123456);
-	ft_printf("\nprintf result = %d\n", result);
+	result = ft_printf("%x\n", 123456);
+	ft_printf("ft_printf result = %d\n", result - 1);
+	result = printf("%x\n", 123456);
+	ft_printf("printf result = %d\n", result - 1);
 
 	ft_printf("\n\n");
 
-	result = ft_printf("%X", 123456);
-	ft_printf("\nft_printf result = %d\n", result);
-	result = printf("%X", 123456);
-	ft_printf("\nprintf result = %d\n", result);
+	result = ft_printf("%X\n", 123456);
+	ft_printf("ft_printf result = %d\n", result - 1);
+	result = printf("%X\n", 123456);
+	ft_printf("printf result = %d\n", result - 1);
 	ft_printf("\n\n");
 }

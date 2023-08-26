@@ -5,6 +5,8 @@ void	ft_printprefix(t_argformat *total)
 	char	chr;
 
 	chr = '0'; 
+	if (total->flags == 0)
+		return ;
 	if (!total->dash && !total->zero && total->width)
 		chr = ' ';
 	while (total->width - total->precission - total ->s_len > 0 \
@@ -72,6 +74,8 @@ void	ft_prints(t_argformat *total, char *s)
 
 void	ft_printsuffix(t_argformat *total)
 {
+	if (total->flags == 0)
+		return ;
 	while (total->rwidth - total->count && total->count != -1)
 	{
 		ft_printc(total, ' ');

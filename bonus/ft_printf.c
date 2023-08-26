@@ -6,7 +6,7 @@
 /*   By: nmaturan <nmaturan@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 16:16:35 by nmaturan          #+#    #+#             */
-/*   Updated: 2023/08/23 12:32:26 by ohadmin          ###   ########.fr       */
+/*   Updated: 2023/08/26 21:20:17 by nmaturan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,17 +23,16 @@ char	*check_valid_format(t_argformat *total, va_list args, const char *str)
 	arg_len = 0;
 	ref = NULL;
 	if (*str)
-		ref = (char*) str;
+		ref = (char *) str;
 	while (ref[i] && !ft_strchr("cspdiuxX%\0", ref[i]))
 		i++;
-	if (ref && !ft_strchr("cspdiuxX%\0", ref[i]))
+	if (ref[i] && !ft_strchr("cspdiuxX%\0", ref[i]))
 		return (NULL);
 	if (ref && i != 0)
 	{
-		total->flags = 1;
 		arg_len = format_handler(total, args, *(ref + i));
 		if (arg_len != -1)
-			total->flags = 0;
+			total->flags = 1;
 	}
 	return (ref + i);
 }
@@ -44,7 +43,7 @@ int	flag_parser(t_argformat *total, char *str)
 	size_t	j;
 
 	i = 0;
-	while (str[i] && str + i < total->spec && total->flags == 0)
+	while (str[i] && str + i < total->spec)
 	{
 		j = 0;
 		if (str[i] == '+')
@@ -66,7 +65,7 @@ int	flag_parser(t_argformat *total, char *str)
 		else
 			return (total->count = -1);
 	}
-	return (1);
+	return (total->flags = 0);
 }
 
 int	format_handler(t_argformat *total, va_list args, const char format)
@@ -112,8 +111,8 @@ int	ft_printf(const char *str, ...)
 		if (str[i] == '%' && total.count != -1)
 		{
 			total.spec = check_valid_format(&total, args_copy, &str[i + 1]);
-			if (total.spec != &str[i + 1] && total.count != -1)
-				flag_parser(&total, (char *)str + i);
+			if (total.spec != str + i + 1 && total.count != -1 && total.flags)
+				flag_parser(&total, (char *)str + i + 1);
 			if (total.spec && total.count != -1)
 				if (format_handler(&total, args, *total.spec) != -1)
 					i += 1 + (total.spec - (str + i));
