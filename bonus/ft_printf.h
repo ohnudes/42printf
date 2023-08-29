@@ -6,7 +6,7 @@
 /*   By: nmaturan <nmaturan@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 16:14:22 by nmaturan          #+#    #+#             */
-/*   Updated: 2023/08/23 12:31:26 by ohadmin          ###   ########.fr       */
+/*   Updated: 2023/08/29 12:55:32 by nmaturan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ char	*check_valid_format(t_argformat *total, va_list args, const char *str);
 int		format_handler(t_argformat *total, va_list args, const char format);
 
 // print utils
-void	ft_printc(t_argformat *total, char n);
+size_t	ft_printc(t_argformat *total, char n);
 void	ft_prints(t_argformat *total, char *s);
 void	ft_printprefix(t_argformat *total);
 void	ft_printsuffix(t_argformat *total);
