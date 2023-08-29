@@ -6,11 +6,25 @@
 /*   By: nmaturan <nmaturan@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 16:16:35 by nmaturan          #+#    #+#             */
-/*   Updated: 2023/08/29 19:53:38 by nmaturan         ###   ########.fr       */
+/*   Updated: 2023/08/29 20:29:08 by nmaturan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+int	simple_flag(t_argformat *total, char *str)
+{
+	int	j;
+
+	j = 0;
+	if (*str == '+')
+		j = ft_width_adjust(&total->sum, &total->s_len, 1, NULL);
+	else if (*str == ' ')
+		j = ft_width_adjust(&total->space, &total->s_len, 1, NULL);
+	else if (*str == '#')
+		j = ft_width_adjust(&total->hash, &total->s_len, 2, NULL);
+	return (j);
+}
 
 char	*check_valid_format(t_argformat *total, va_list args, const char *str)
 {
@@ -41,6 +55,14 @@ char	*check_valid_format(t_argformat *total, va_list args, const char *str)
 	return (NULL);
 }
 
+/*
+if (str[i] == '+')
+j = ft_width_adjust(&total->sum, &total->s_len, 1, NULL);
+else if (str[i] == ' ')
+j = ft_width_adjust(&total->space, &total->s_len, 1, NULL);
+else if (str[i] == '#')
+j = ft_width_adjust(&total->hash, &total->s_len, 2, NULL);
+*/
 int	flag_parser(t_argformat *total, char *str)
 {
 	size_t	i;
@@ -50,12 +72,8 @@ int	flag_parser(t_argformat *total, char *str)
 	while (str[i] && str + i < total->spec)
 	{
 		j = 0;
-		if (str[i] == '+')
-			j = ft_width_adjust(&total->sum, &total->s_len, 1, NULL);
-		else if (str[i] == ' ')
-			j = ft_width_adjust(&total->space, &total->s_len, 1, NULL);
-		else if (str[i] == '#')
-			j = ft_width_adjust(&total->hash, &total->s_len, 2, NULL);
+		if (str[i] == '+' || str[i] == ' ' || str[i] == '#')
+			j = simple_flag(total, str + i);
 		else if (str[i] == '-')
 			j = ft_width_adjust(&total->dash, &total->rwidth, 0, str + i);
 		else if (str[i] == '0' && ft_strchr("diuxX", *total->spec))
@@ -74,7 +92,7 @@ int	flag_parser(t_argformat *total, char *str)
 
 int	format_handler(t_argformat *total, va_list args, const char format)
 {
-	if (!total->flags)
+	if (!total->flags && total->count != -1)
 	{
 		ft_flagvalidation(total, format);
 		ft_printprefix(total);
@@ -118,11 +136,10 @@ int	ft_printf(const char *str, ...)
 		else
 		{
 			total.spec = check_valid_format(&total, args_copy, &str[i + 1]);
-			if (total.spec != str + i + 1 && total.count != -1 )
+			if (total.spec != str + i + 1 && total.count != -1)
 				flag_parser(&total, (char *)str + i + 1);
-			if (total.spec && total.count != -1)
-				if (format_handler(&total, args, *total.spec) != -1)
-					i += 1 + (total.spec - (str + i));
+			if (total.spec && format_handler(&total, args, *total.spec) != -1)
+				i += 1 + (total.spec - (str + i));
 		}
 	}
 	va_end(args);

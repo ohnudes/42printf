@@ -6,7 +6,7 @@
 /*   By: nmaturan <nmaturan@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 20:42:27 by nmaturan          #+#    #+#             */
-/*   Updated: 2023/08/29 18:35:19 by nmaturan         ###   ########.fr       */
+/*   Updated: 2023/08/29 20:06:39 by nmaturan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	ft_flagvalidation(t_argformat *total, const char format)
 		total->zero = 0;
 	if (total->zero)
 	{
-		if (format == 'c' || format == 'p'|| format == '%' || format == 's')
+		if (format == 'c' || format == 'p' || format == '%' || format == 's')
 		{
 			total->zero = 0;
 			total->width = 0;
@@ -28,7 +28,7 @@ void	ft_flagvalidation(t_argformat *total, const char format)
 	{
 		if (format == 's')
 			total->truncate = total->precission;
-		else if (format == 'c' || format == 'p'|| format == '%')
+		else if (format == 'c' || format == 'p' || format == '%')
 		{
 			total->dot = 0;
 			total->precission = 0;

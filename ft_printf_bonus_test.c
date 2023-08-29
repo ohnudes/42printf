@@ -6,7 +6,7 @@
 /*   By: nmaturan <nmaturan@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 19:01:50 by nmaturan          #+#    #+#             */
-/*   Updated: 2023/08/29 19:47:09 by nmaturan         ###   ########.fr       */
+/*   Updated: 2023/08/29 20:21:53 by nmaturan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,7 +140,7 @@ void	pad_test4(void)
 {
 	int	result;
 
-	ft_printf(">>PRINTF_TESTING 9-11<<\n");
+	ft_printf(">>9 - 11 PRINTF_TESTING<<\n");
 	result = printf("|%5.10d|\n", 42);
 	printf("9. %%5.10 result = %d\n\n", result - 3);
 	// output: |0000000042|

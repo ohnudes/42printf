@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf_print.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nmaturan <nmaturan@student.42barcel>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/29 20:06:57 by nmaturan          #+#    #+#             */
+/*   Updated: 2023/08/29 20:09:06 by nmaturan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 #include <stdio.h>
 
@@ -13,11 +25,6 @@ void	ft_printprefix(t_argformat *total)
 	if (total->precission)
 		precission = total->precission - total->s_len;
 	width = total->width - precission - total->s_len;
-	/*
-	printf("width = %d\n", width);
-	printf("precission = %d\n", width);
-	printf("s_len = %d\n", width);
-	*/
 	if (!total->dash && !total->zero && total->width)
 		set = ' ';
 	while (width > 0 && total->count != -1)
@@ -41,7 +48,7 @@ size_t	ft_printc(t_argformat *total, char n)
 		return (0);
 	if (total->flags)
 	{
-		total->s_len += 1;	
+		total->s_len += 1;
 		return (0);
 	}
 	wrbytes = 0;
@@ -75,12 +82,14 @@ void	ft_prints(t_argformat *total, char *s)
 			total->truncate--;
 		}
 	}
-	else		
+	else
+	{
 		while (s[i] && total->count != -1)
 		{
 			ft_printc(total, s[i]);
 			i++;
 		}
+	}
 }
 
 void	ft_printsuffix(t_argformat *total)
