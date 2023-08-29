@@ -6,7 +6,7 @@
 /*   By: nmaturan <nmaturan@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 14:31:07 by nmaturan          #+#    #+#             */
-/*   Updated: 2023/08/23 11:10:26 by ohadmin          ###   ########.fr       */
+/*   Updated: 2023/08/29 14:35:57 by nmaturan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_isnum(char n)
 {
-	if ((n > 0) && (n <= 9))
+	if ((n > '0') && (n <= '9'))
 		return (1);
 	return (0);
 }
@@ -45,7 +45,7 @@ int	ft_width_adjust(int	*flag, int *length, int size, char *str)
 	else if (size == 0 && str != NULL)
 	{
 		if (ft_isnum(*(str + 1)))
-			iterator = ft_param_len(length, str + 1);
+			iterator += ft_param_len(length, str + 1);
 		else
 			*flag = 0;
 	}
