@@ -6,7 +6,7 @@
 /*   By: nmaturan <nmaturan@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 19:01:50 by nmaturan          #+#    #+#             */
-/*   Updated: 2023/08/26 20:44:55 by nmaturan         ###   ########.fr       */
+/*   Updated: 2023/08/29 14:13:43 by nmaturan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,55 +24,14 @@ void	hash_test(void);
 int	main(void)
 {
 	// tests
-	// main_spec();
-	//sum_test();
-	// pad_test();
-	// hash_test();
+	//main_spec(); // test ok
+	//sum_test(); // test ok
+	//hash_test(); // test ok
+	pad_test();
 
-	int	result;
-
-	result = 0;
-	printf("Minimized sum test\n");
-
-	ft_printf("\n>> %%+d <<\n");
-
-	result = ft_printf("%+d\n", 42);
-	ft_printf("ft_printf result = %d\n", result - 3);
-
-	/*
-
-	   result = printf("%+d, %+d\n", 42, -42);
-	   ft_printf("printf result = %d\n", result - 3);
-	ft_printf("\n>> %% i <<\n");
-
-	result = ft_printf("% i, % i\n", 42, -42);
-	ft_printf("ft_printf result = %d\n", result - 3);
-	result = printf("% i, % i\n", 42, -42);
-	ft_printf("printf result = %d\n", result - 3);
 	return (0);
-	*/
 }
 
-void	hash_test(void)
-{
-	printf("\n>>HASH_TEST<<\n");
-	printf("'#' to -Xx-\n\n");
-
-	printf(">>PRINTF_TESTING<<\n");
-	int result = printf("|%#x|\n", 42);
-	printf("%%#x result = %d\n\n", result - 3);
-
-	result = printf("|%#X|\n", 42);
-	printf("%%#X result = %d\n\n", result - 3);
-
-	printf(">>FT_TESTING<<\n");
-
-	result = ft_printf("|%#x|\n", 42);
-	ft_printf("%%#x result = %d\n\n", result - 3);
-
-	result = ft_printf("|%#X|\n", 42);
-	ft_printf("%%#X result = %d\n\n", result - 3);
-}
 
 /* PAD_TEST NOTES:
 
@@ -84,13 +43,16 @@ void	hash_test(void)
    */
 void	pad_test(void)
 {
-	printf("\n>>PAD_TEST<<\n");
-	printf("'-' to all\n");
-	printf("'0', '.' to -diuxX-\n\n");
+	int result;
 
-	printf(">>PRINTF_TESTING<<\n");
+	result = 0;
+	ft_printf("\n>>PAD_TEST<<\n");
+	ft_printf("'-' to all\n");
+	ft_printf("'0', '.' to -diuxX-\n\n");
 
-	int result = printf("|%+-10d|\n", 42);
+	ft_printf(">>PRINTF_TESTING<<\n");
+
+	result = printf("|%+-10d|\n", 42);
 	printf("1. %%+-10 result = %d\n\n", result - 3);
 	// output: |+42       |
 
@@ -98,6 +60,17 @@ void	pad_test(void)
 	printf("2. %%-10 result = %d\n\n", result - 3);
 	// output: |42        |
 
+	ft_printf(">>FT_TESTING<<\n");
+
+	result = ft_printf("|%+-10d|\n", 42);
+	ft_printf("1. %%+-10 result = %d\n\n", result - 3);
+	// output: |+42       |
+
+	result = ft_printf("|%-10d|\n", 42);
+	ft_printf("2. %%-10 result = %d\n\n", result - 3);
+	// output: |42        |
+
+	/*
 	result = printf("|%10d|\n", 42);
 	printf("3. %%10 result = %d\n\n", result - 3);
 	// output: |        42|
@@ -137,17 +110,38 @@ void	pad_test(void)
 	result = printf("|%.2s|\n", "");
 	printf("11. %%.2s + NULL result = %d\n\n", result - 3);
 	// output: tbd campus
+	*/
+}
 
-	/*
-	result = printf("|%010.5d|\n", 42);
-	printf("11. %%010.5 result = %d\n\n", result - 3);
-	// output: 0 is invalid when . 
+/*
+   result = printf("|%010.5d|\n", 42);
+   printf("11. %%010.5 result = %d\n\n", result - 3);
+// output: 0 is invalid when . 
 
-	result = printf("|%05.10d|\n", 42);
-	printf("12. %%05.10 result = %d\n\n", result - 3);
-	// output: 0 is invalid when . 
+result = printf("|%05.10d|\n", 42);
+printf("12. %%05.10 result = %d\n\n", result - 3);
+// output: 0 is invalid when . 
 */
+
+void	hash_test(void)
+{
+	printf("\n>>HASH_TEST<<\n");
+	printf("'#' to -Xx-\n\n");
+
+	printf(">>PRINTF_TESTING<<\n");
+	int result = printf("|%#x|\n", 42);
+	printf("%%#x result = %d\n\n", result - 3);
+
+	result = printf("|%#X|\n", 42);
+	printf("%%#X result = %d\n\n", result - 3);
+
 	printf(">>FT_TESTING<<\n");
+
+	result = ft_printf("|%#x|\n", 42);
+	ft_printf("%%#x result = %d\n\n", result - 3);
+
+	result = ft_printf("|%#X|\n", 42);
+	ft_printf("%%#X result = %d\n\n", result - 3);
 }
 
 // comparing my printf results with original printf
