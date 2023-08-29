@@ -6,13 +6,12 @@
 /*   By: nmaturan <nmaturan@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 16:16:35 by nmaturan          #+#    #+#             */
-/*   Updated: 2023/08/26 21:20:17 by nmaturan         ###   ########.fr       */
+/*   Updated: 2023/08/29 14:05:18 by nmaturan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-// looks for specifier as %d, %c, etc... and then calculates the argument lenght
 char	*check_valid_format(t_argformat *total, va_list args, const char *str)
 {
 	char	*ref;
@@ -24,17 +23,22 @@ char	*check_valid_format(t_argformat *total, va_list args, const char *str)
 	ref = NULL;
 	if (*str)
 		ref = (char *) str;
-	while (ref[i] && !ft_strchr("cspdiuxX%\0", ref[i]))
-		i++;
-	if (ref[i] && !ft_strchr("cspdiuxX%\0", ref[i]))
-		return (NULL);
-	if (ref && i != 0)
+	if (ref)
 	{
-		arg_len = format_handler(total, args, *(ref + i));
-		if (arg_len != -1)
-			total->flags = 1;
+		while (ref[i] && !ft_strchr("cspdiuxX%", ref[i]))
+			i++;
+		if (ref[i] && ft_strchr("cspdiuxX%", ref[i]))
+		{
+			if (i != 0)
+			{
+				total->flags = 1;
+				arg_len = format_handler(total, args, *(ref + i));
+			}
+			if (arg_len != -1)
+				return (ref + i);
+		}
 	}
-	return (ref + i);
+	return (NULL);
 }
 
 int	flag_parser(t_argformat *total, char *str)
@@ -70,8 +74,11 @@ int	flag_parser(t_argformat *total, char *str)
 
 int	format_handler(t_argformat *total, va_list args, const char format)
 {
-	ft_flagvalidation(total, format);
-	ft_printprefix(total);
+	if (!total->flags)
+	{
+		ft_flagvalidation(total, format);
+		ft_printprefix(total);
+	}
 	if (format == 'c' && total->count != -1)
 		ft_printc(total, va_arg(args, int));
 	else if (format == 's' && total->count != -1)
@@ -86,7 +93,7 @@ int	format_handler(t_argformat *total, va_list args, const char format)
 		ft_printx(total, format, va_arg(args, unsigned int));
 	else if (format == '%' && total->count != -1)
 		ft_printc(total, '%');
-	if (total->count != -1)
+	if (!total->flags && total->count != -1)
 		ft_printsuffix(total);
 	if (total->count == -1)
 		return (-1);
@@ -106,12 +113,12 @@ int	ft_printf(const char *str, ...)
 	i = 0;
 	while (str[i] != '\0' && total.count != -1)
 	{
-		while (str[i] && str[i] != '%' && total.count != -1)
-			ft_printc(&total, str[i++]);
-		if (str[i] == '%' && total.count != -1)
+		if (str[i] != '%')
+			i += ft_printc(&total, str[i]);
+		else
 		{
 			total.spec = check_valid_format(&total, args_copy, &str[i + 1]);
-			if (total.spec != str + i + 1 && total.count != -1 && total.flags)
+			if (total.spec != str + i + 1 && total.count != -1 )
 				flag_parser(&total, (char *)str + i + 1);
 			if (total.spec && total.count != -1)
 				if (format_handler(&total, args, *total.spec) != -1)
