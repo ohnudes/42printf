@@ -6,7 +6,7 @@
 /*   By: nmaturan <nmaturan@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 16:16:35 by nmaturan          #+#    #+#             */
-/*   Updated: 2023/08/29 19:08:49 by nmaturan         ###   ########.fr       */
+/*   Updated: 2023/08/29 19:53:38 by nmaturan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	flag_parser(t_argformat *total, char *str)
 			j = ft_width_adjust(&total->dash, &total->rwidth, 0, str + i);
 		else if (str[i] == '0' && ft_strchr("diuxX", *total->spec))
 			j = ft_width_adjust(&total->zero, &total->width, 0, str + i);
-		else if (str[i] == '.' && ft_strchr("diuxX", *total->spec))
+		else if (str[i] == '.' && ft_strchr("sdiuxX", *total->spec))
 			j = ft_width_adjust(&total->dot, &total->precission, 0, str + i);
 		else if (ft_isnum(str[i]))
 			j = ft_param_len(&total->width, str + i);

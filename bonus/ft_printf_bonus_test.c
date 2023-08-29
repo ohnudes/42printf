@@ -6,7 +6,7 @@
 /*   By: nmaturan <nmaturan@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 19:01:50 by nmaturan          #+#    #+#             */
-/*   Updated: 2023/08/29 19:09:58 by nmaturan         ###   ########.fr       */
+/*   Updated: 2023/08/29 19:47:09 by nmaturan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,10 @@ int	main(void)
 	//main_spec(); // test ok
 	//sum_test(); // test ok
 	//hash_test(); // test ok
-	//pad_test1();
-	//pad_test2();
-	//pad_test3();
-	//pad_test4();
-	ft_printf("|%10.5d|\n", 42);
+	pad_test1();
+	pad_test2();
+	pad_test3();
+	pad_test4();
 	return (0);
 }
 
@@ -56,7 +55,7 @@ void	pad_test1(void)
 	ft_printf("'-' to all\n");
 	ft_printf("'0', '.' to -diuxX-\n\n");
 
-	ft_printf(">>PRINTF_TESTING 1-2<<\n");
+	ft_printf(">>1 - 2 PRINTF_TESTING <<\n");
 
 	result = printf("|%+-10d|\n", 42);
 	printf("1. %%+-10 result = %d\n\n", result - 3);
@@ -81,7 +80,7 @@ void	pad_test2(void)
 {
 	int result;
 
-	ft_printf(">>PRINTF_TESTING 3-5<<\n");
+	ft_printf(">>3 - 5 PRINTF_TESTING<<\n");
 
 	result = printf("|%10d|\n", 42);
 	printf("3. %%10 result = %d\n\n", result - 3);
@@ -114,7 +113,7 @@ void	pad_test3(void)
 {
 	int	result;
 
-	ft_printf(">>PRINTF_TESTING 6-8<<\n");
+	ft_printf(">>6 - 8 PRINTF_TESTING<<\n");
 	result = printf("|%-10.5d|\n", 42);
 	printf("6. %%-10.5 result = %d\n\n", result - 3);
 	// output: |00042     |

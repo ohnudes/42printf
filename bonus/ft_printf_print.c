@@ -1,4 +1,5 @@
 #include "ft_printf.h"
+#include <stdio.h>
 
 void	ft_printprefix(t_argformat *total)
 {
@@ -9,8 +10,14 @@ void	ft_printprefix(t_argformat *total)
 	set = '0';
 	width = 0;
 	precission = 0;
-	width = total->width - total->precission - total->s_len;
-	precission = total->precission - total->s_len;
+	if (total->precission)
+		precission = total->precission - total->s_len;
+	width = total->width - precission - total->s_len;
+	/*
+	printf("width = %d\n", width);
+	printf("precission = %d\n", width);
+	printf("s_len = %d\n", width);
+	*/
 	if (!total->dash && !total->zero && total->width)
 		set = ' ';
 	while (width > 0 && total->count != -1)
