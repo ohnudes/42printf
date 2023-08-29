@@ -23,26 +23,27 @@ void	ft_printprefix(t_argformat *total)
 	}
 }
 
-void	ft_printc(t_argformat *total, char n)
+size_t	ft_printc(t_argformat *total, char n)
 {
 	int	wrbytes;
 
 	if (total->count == -1)
-		return ;
+		return (0);
 	if (total->flags)
 	{
 		total->s_len += 1;	
-		return ;
+		return (0);
 	}
 	wrbytes = 0;
 	wrbytes = write(1, &n, 1);
 	if (wrbytes == -1)
 	{
 		total->count = -1;
-		return ;
+		return (0);
 	}
 	else if (wrbytes == 1)
 		total->count += 1;
+	return (1);
 }
 
 void	ft_prints(t_argformat *total, char *s)
