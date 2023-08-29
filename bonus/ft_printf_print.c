@@ -1,26 +1,28 @@
 #include "ft_printf.h"
-#include <stdio.h>
 
 void	ft_printprefix(t_argformat *total)
 {
-	char	chr;
+	int		width;
+	int		precission;
+	char	set;
 
-	chr = '0'; 
-	if (total->flags == 0)
-		return ;
+	set = '0';
+	width = 0;
+	precission = 0;
+	width = total->width - total->precission - total->s_len;
+	precission = total->precission - total->s_len;
 	if (!total->dash && !total->zero && total->width)
-		chr = ' ';
-	while (total->width - total->precission - total ->s_len > 0 \
-			&& total->count != -1)
+		set = ' ';
+	while (width > 0 && total->count != -1)
 	{
-		ft_printc(total, chr);
-		total->width--;
+		ft_printc(total, set);
+		width--;
 	}
-	while (total->precission - total->s_len && !total->truncate \
-			&& total->count != -1)
+	while (precission > 0 && !total->truncate && total->count != -1)
 	{
-		ft_printc(total, chr);
-		total->precission--;
+		set = '0';
+		ft_printc(total, set);
+		precission--;
 	}
 }
 

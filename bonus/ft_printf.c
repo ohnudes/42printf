@@ -6,7 +6,7 @@
 /*   By: nmaturan <nmaturan@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 16:16:35 by nmaturan          #+#    #+#             */
-/*   Updated: 2023/08/29 14:05:18 by nmaturan         ###   ########.fr       */
+/*   Updated: 2023/08/29 19:08:49 by nmaturan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,13 +58,13 @@ int	flag_parser(t_argformat *total, char *str)
 			j = ft_width_adjust(&total->hash, &total->s_len, 2, NULL);
 		else if (str[i] == '-')
 			j = ft_width_adjust(&total->dash, &total->rwidth, 0, str + i);
-		else if (str[i] == '0' && ft_strchr("diuxX", str[i]))
+		else if (str[i] == '0' && ft_strchr("diuxX", *total->spec))
 			j = ft_width_adjust(&total->zero, &total->width, 0, str + i);
-		else if (str[i] == '.' && ft_strchr("diuxX", str[i]))
-			j = ft_width_adjust(&total->dot, &total->width, 0, str + i);
+		else if (str[i] == '.' && ft_strchr("diuxX", *total->spec))
+			j = ft_width_adjust(&total->dot, &total->precission, 0, str + i);
 		else if (ft_isnum(str[i]))
 			j = ft_param_len(&total->width, str + i);
-		if (j <= 7 && j > 0)
+		if (j <= 8 && j > 0)
 			i += j;
 		else
 			return (total->count = -1);

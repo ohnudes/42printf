@@ -6,7 +6,7 @@
 /*   By: nmaturan <nmaturan@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 19:01:50 by nmaturan          #+#    #+#             */
-/*   Updated: 2023/08/29 14:13:43 by nmaturan         ###   ########.fr       */
+/*   Updated: 2023/08/29 19:09:58 by nmaturan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,10 @@
 
 void	main_spec(void);
 void	sum_test(void);
-void	pad_test(void);
+void	pad_test1(void);
+void	pad_test2(void);
+void	pad_test3(void);
+void	pad_test4(void);
 void	hash_test(void);
 
 // specifiers
@@ -27,8 +30,11 @@ int	main(void)
 	//main_spec(); // test ok
 	//sum_test(); // test ok
 	//hash_test(); // test ok
-	pad_test();
-
+	//pad_test1();
+	//pad_test2();
+	//pad_test3();
+	//pad_test4();
+	ft_printf("|%10.5d|\n", 42);
 	return (0);
 }
 
@@ -41,7 +47,7 @@ int	main(void)
    printf("%%-010 result = %d\n\n", result - 3);
 
    */
-void	pad_test(void)
+void	pad_test1(void)
 {
 	int result;
 
@@ -50,7 +56,7 @@ void	pad_test(void)
 	ft_printf("'-' to all\n");
 	ft_printf("'0', '.' to -diuxX-\n\n");
 
-	ft_printf(">>PRINTF_TESTING<<\n");
+	ft_printf(">>PRINTF_TESTING 1-2<<\n");
 
 	result = printf("|%+-10d|\n", 42);
 	printf("1. %%+-10 result = %d\n\n", result - 3);
@@ -69,8 +75,14 @@ void	pad_test(void)
 	result = ft_printf("|%-10d|\n", 42);
 	ft_printf("2. %%-10 result = %d\n\n", result - 3);
 	// output: |42        |
+}
 
-	/*
+void	pad_test2(void)
+{
+	int result;
+
+	ft_printf(">>PRINTF_TESTING 3-5<<\n");
+
 	result = printf("|%10d|\n", 42);
 	printf("3. %%10 result = %d\n\n", result - 3);
 	// output: |        42|
@@ -83,37 +95,80 @@ void	pad_test(void)
 	printf("5. %%.10 result = %d\n\n", result - 3);
 	// output: |0000000042|
 
+	ft_printf(">>FT_TESTING<<\n");
+
+	result = ft_printf("|%10d|\n", 42);
+	ft_printf("3. %%10 result = %d\n\n", result - 3);
+	// output: |        42|
+
+	result = ft_printf("|%010d|\n", 42);
+	ft_printf("4. %%010 result = %d\n\n", result - 3);
+	// output: |0000000042|
+	
+	result = ft_printf("|%.10d|\n", 42);
+	ft_printf("5. %%.10 result = %d\n\n", result - 3);
+	// output: |0000000042|
+}
+
+void	pad_test3(void)
+{
+	int	result;
+
+	ft_printf(">>PRINTF_TESTING 6-8<<\n");
 	result = printf("|%-10.5d|\n", 42);
 	printf("6. %%-10.5 result = %d\n\n", result - 3);
 	// output: |00042     |
-
 	result = printf("|%10.5d|\n", 42);
 	printf("7. %%10.5 result = %d\n\n", result - 3);
 	// output: |     00042|
-
 	result = printf("|%-5.10d|\n", 42);
 	printf("8. %%-5.10 result = %d\n\n", result - 3);
 	// output: |0000000042|
 
+	ft_printf(">>FT_TESTING<<\n");
+	result = ft_printf("|%-10.5d|\n", 42);
+	ft_printf("6. %%-10.5 result = %d\n\n", result - 3);
+	// output: |00042     |
+	result = ft_printf("|%10.5d|\n", 42);
+	ft_printf("7. %%10.5 result = %d\n\n", result - 3);
+	// output: |     00042|
+	result = ft_printf("|%-5.10d|\n", 42);
+	ft_printf("8. %%-5.10 result = %d\n\n", result - 3);
+	// output: |0000000042|
+}
+
+void	pad_test4(void)
+{
+	int	result;
+
+	ft_printf(">>PRINTF_TESTING 9-11<<\n");
 	result = printf("|%5.10d|\n", 42);
 	printf("9. %%5.10 result = %d\n\n", result - 3);
 	// output: |0000000042|
-
 	result = printf("|%-.d|\n", 42);
 	printf("10. %%-. result = %d\n\n", result - 3);
 	// output: |42|
-
 	result = printf("|%.5s|\n", "1234567890");
 	printf("11. %%.5s result = %d\n\n", result - 3);
 	// output: |12345|
 
-	result = printf("|%.2s|\n", "");
-	printf("11. %%.2s + NULL result = %d\n\n", result - 3);
-	// output: tbd campus
-	*/
+	ft_printf(">>FT_TESTING<<\n");
+	result = ft_printf("|%5.10d|\n", 42);
+	ft_printf("9. %%5.10 result = %d\n\n", result - 3);
+	// output: |0000000042|
+	result = ft_printf("|%-.d|\n", 42);
+	ft_printf("10. %%-. result = %d\n\n", result - 3);
+	// output: |42|
+	result = ft_printf("|%.5s|\n", "1234567890");
+	ft_printf("11. %%.5s result = %d\n\n", result - 3);
+	// output: |12345|
 }
 
 /*
+   result = printf("|%.2s|\n", "");
+   printf("11. %%.2s + NULL result = %d\n\n", result - 3);
+// output: tbd campus
+//
    result = printf("|%010.5d|\n", 42);
    printf("11. %%010.5 result = %d\n\n", result - 3);
 // output: 0 is invalid when . 
