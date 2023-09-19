@@ -6,12 +6,11 @@
 /*   By: nmaturan <nmaturan@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 20:06:57 by nmaturan          #+#    #+#             */
-/*   Updated: 2023/08/29 20:09:06 by nmaturan         ###   ########.fr       */
+/*   Updated: 2023/09/19 19:34:06 by nmaturan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdio.h>
 
 void	ft_printprefix(t_argformat *total)
 {
@@ -75,7 +74,7 @@ void	ft_prints(t_argformat *total, char *s)
 	i = 0;
 	if (total->truncate)
 	{
-		while (s[i] && total->truncate && total->count != -1)
+		while (s[i] != '\0' && total->truncate && total->count != -1)
 		{
 			ft_printc(total, s[i]);
 			i++;
@@ -84,7 +83,7 @@ void	ft_prints(t_argformat *total, char *s)
 	}
 	else
 	{
-		while (s[i] && total->count != -1)
+		while (s[i] != '\0' && total->count != -1)
 		{
 			ft_printc(total, s[i]);
 			i++;
@@ -94,6 +93,6 @@ void	ft_prints(t_argformat *total, char *s)
 
 void	ft_printsuffix(t_argformat *total)
 {
-	while (total->rwidth - total->count >= 0 && total->count != -1)
+	while (total->rwidth - total->count > 0 && total->count != -1)
 		ft_printc(total, ' ');
 }

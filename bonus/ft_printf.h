@@ -6,7 +6,7 @@
 /*   By: nmaturan <nmaturan@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 16:14:22 by nmaturan          #+#    #+#             */
-/*   Updated: 2023/08/29 20:42:02 by nmaturan         ###   ########.fr       */
+/*   Updated: 2023/09/19 18:15:56 by nmaturan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ void	ft_printp(t_argformat *total, void *ptr);
 void	ft_printdi(t_argformat *total, int i);
 void	ft_printu(t_argformat *total, unsigned int u);
 void	ft_printx(t_argformat *total, char type, unsigned int x);
-void	ft_printx_lc(t_argformat *total, unsigned int x);
-void	ft_printx_uc(t_argformat *total, unsigned int X);
+void	ft_printx_lc(t_argformat *total, unsigned long int x);
+void	ft_printx_uc(t_argformat *total, unsigned long int X);
 
 // utils
 char	*ft_strchr(const char *str, char set);

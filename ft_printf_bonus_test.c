@@ -6,14 +6,17 @@
 /*   By: nmaturan <nmaturan@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 19:01:50 by nmaturan          #+#    #+#             */
-/*   Updated: 2023/08/29 20:21:53 by nmaturan         ###   ########.fr       */
+/*   Updated: 2023/09/19 19:24:53 by nmaturan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include <limits.h>
 #include <stdio.h>
 
+
 void	main_spec(void);
+void	int_test(void);
 void	sum_test(void);
 void	pad_test1(void);
 void	pad_test2(void);
@@ -28,12 +31,13 @@ int	main(void)
 {
 	// tests
 	//main_spec(); // test ok
+	int_test(); // test ok
 	//sum_test(); // test ok
 	//hash_test(); // test ok
-	pad_test1();
-	pad_test2();
-	pad_test3();
-	pad_test4();
+//	pad_test1();
+//	pad_test2();
+//	pad_test3();
+//	pad_test4();
 	return (0);
 }
 
@@ -219,6 +223,20 @@ void	sum_test(void)
 	ft_printf("ft_printf result = %d\n", result - 3);
 	result = printf("% i, % i\n", 42, -42);
 	ft_printf("printf result = %d\n", result - 3);
+}
+
+void	int_test(void)
+{
+	int	result;
+
+	result = 0;
+
+	ft_printf("\n>> %%d <<\n");
+
+	result = ft_printf("%if.m?d.TD%%T\n", -728639913);
+	ft_printf("ft_printf result = %d\n", result - 1);
+	result = printf("%if.m?d.TD%%T\n", -728639913);
+	printf("printf result = %d\n", result - 1);
 }
 
 void	main_spec(void)

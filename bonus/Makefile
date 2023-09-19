@@ -6,11 +6,11 @@
 #    By: nmaturan <nmaturan@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/07 19:05:10 by nmaturan          #+#    #+#              #
-#    Updated: 2023/08/29 12:46:10 by nmaturan         ###   ########.fr        #
+#    Updated: 2023/09/19 18:34:42 by nmaturan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = test.a 
+NAME = libftprintf.a 
 
 FLAGS = -Wall -Wextra -Werror
 
@@ -38,7 +38,6 @@ $(NAME): $(OBJ)
 	@echo Compiling $<
 	@gcc -c $(T_FLAGS) $< -o $@
 	@echo Compilation complete.
-
 
 fclean: clean
 	@rm -f $(NAME)

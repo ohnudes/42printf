@@ -6,7 +6,7 @@
 /*   By: nmaturan <nmaturan@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 16:16:35 by nmaturan          #+#    #+#             */
-/*   Updated: 2023/08/29 20:29:08 by nmaturan         ###   ########.fr       */
+/*   Updated: 2023/09/19 19:20:18 by nmaturan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,14 +55,6 @@ char	*check_valid_format(t_argformat *total, va_list args, const char *str)
 	return (NULL);
 }
 
-/*
-if (str[i] == '+')
-j = ft_width_adjust(&total->sum, &total->s_len, 1, NULL);
-else if (str[i] == ' ')
-j = ft_width_adjust(&total->space, &total->s_len, 1, NULL);
-else if (str[i] == '#')
-j = ft_width_adjust(&total->hash, &total->s_len, 2, NULL);
-*/
 int	flag_parser(t_argformat *total, char *str)
 {
 	size_t	i;
@@ -92,7 +84,7 @@ int	flag_parser(t_argformat *total, char *str)
 
 int	format_handler(t_argformat *total, va_list args, const char format)
 {
-	if (!total->flags && total->count != -1)
+	if (!total->flags && total->count != -1 && total->s_len)
 	{
 		ft_flagvalidation(total, format);
 		ft_printprefix(total);
