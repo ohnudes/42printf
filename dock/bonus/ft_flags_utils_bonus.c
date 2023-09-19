@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_flags_utils.c                                   :+:      :+:    :+:   */
+/*   ft_flags_utils_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nmaturan <nmaturan@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 20:42:27 by nmaturan          #+#    #+#             */
-/*   Updated: 2023/08/29 20:06:39 by nmaturan         ###   ########.fr       */
+/*   Updated: 2023/09/19 19:52:07 by nmaturan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "ft_printf_bonus.h"
 
 void	ft_flagvalidation(t_argformat *total, const char format)
 {

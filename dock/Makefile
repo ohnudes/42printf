@@ -6,7 +6,7 @@
 #    By: nmaturan <nmaturan@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/21 14:08:04 by nmaturan          #+#    #+#              #
-#    Updated: 2023/09/19 17:44:31 by nmaturan         ###   ########.fr        #
+#    Updated: 2023/09/19 20:31:22 by nmaturan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,12 +28,18 @@ SRC = ft_printf.c ft_printf_utils.c
 # Objects
 OBJ = $(SRC:.c=.o)
 
+#### BONUS
+BONUS_DIR = bonus/
+BONUS = bonus.a
+
 #### LIBFT
 LFT_DIR = libft/
 LIBFT = libft.a
-DEPS = $(addprefix $(LFT_DIR), $(LIBFT))
 
-MAIN = test.c
+# Deps 
+DEPS = $(addprefix $(LFT_DIR), $(LIBFT)) $(addprefix $(BONUS_DIR), $(BONUS))
+
+MAIN = ft_printf_bonus.c
 
 #### Compilacion del programa ####
 
@@ -46,6 +52,14 @@ $(NAME): $(OBJ)
 	@mv $(LIBFT) $(NAME)
 	@$(LNK) $@ $(OBJ)
 	@echo Library completed.
+
+bonus: fclean $(OBJBONUS)
+	@echo Creating bonus library: $(NAME)...
+	@make -C $(BONUS_DIR)
+	@cp $(BONUS_DIR)$(BONUS) .
+	@mv $(BONUS) $(NAME)
+	@make -C $(BONUS_DIR) fclean
+	@echo Bonus library completed.
 
 %.o: %.c $(INC)
 	@echo Compiling $<...
@@ -64,8 +78,6 @@ clean:
 
 re: fclean all
 
-test: re clean
-	@make clean
-	@gcc -fsanitize=address $(FLAGS) $(MAIN) $(NAME) -o prog.out
+test: 
 
 .PHONY: all clean fclean re makecheck

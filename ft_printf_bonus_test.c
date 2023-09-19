@@ -6,11 +6,11 @@
 /*   By: nmaturan <nmaturan@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 19:01:50 by nmaturan          #+#    #+#             */
-/*   Updated: 2023/09/19 19:24:53 by nmaturan         ###   ########.fr       */
+/*   Updated: 2023/09/19 20:38:05 by nmaturan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "ft_printf_bonus.h"
 #include <limits.h>
 #include <stdio.h>
 
@@ -29,9 +29,13 @@ void	hash_test(void);
 
 int	main(void)
 {
+	int	result = ft_printf("|%-5%|\n");
+	ft_printf("result = %d\n", result - 3);
+	result = printf("|%-5%|\n");
+	printf("result = %d\n", result - 3);
 	// tests
 	//main_spec(); // test ok
-	int_test(); // test ok
+	//int_test(); // test ok
 	//sum_test(); // test ok
 	//hash_test(); // test ok
 //	pad_test1();

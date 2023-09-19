@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_diuxp.c                                  :+:      :+:    :+:   */
+/*   ft_printf_diuxp_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nmaturan <nmaturan@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 18:23:45 by nmaturan          #+#    #+#             */
-/*   Updated: 2023/09/19 19:29:31 by nmaturan         ###   ########.fr       */
+/*   Updated: 2023/09/19 19:52:43 by nmaturan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "ft_printf_bonus.h"
 
 void	ft_printdi(t_argformat *total, int nb)
 {

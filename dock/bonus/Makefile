@@ -6,11 +6,11 @@
 #    By: nmaturan <nmaturan@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/07 19:05:10 by nmaturan          #+#    #+#              #
-#    Updated: 2023/09/19 20:37:20 by nmaturan         ###   ########.fr        #
+#    Updated: 2023/09/19 20:11:38 by nmaturan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = libftprintf.a 
+NAME = bonus.a 
 
 FLAGS = -Wall -Wextra -Werror
 
@@ -25,8 +25,6 @@ SRC = ft_printf_bonus.c ft_printf_utils_bonus.c ft_printf_diuxp_bonus.c ft_print
 
 OBJ = $(SRC:.c=.o)
 
-MAIN = ft_printf_bonus_test.c
-
 all: $(NAME)
 
 $(NAME): $(OBJ)
@@ -36,7 +34,7 @@ $(NAME): $(OBJ)
 
 %.o: %.c $(INC)
 	@echo Compiling $<
-	@gcc -c $(T_FLAGS) $< -o $@
+	@gcc -c $(FLAGS) $< -o $@
 	@echo Compilation complete.
 
 fclean: clean
@@ -46,11 +44,5 @@ clean:
 	@rm -f $(OBJ)
 
 re: fclean all
-
-bonus: 
-
-test: re
-	@make clean
-	@gcc $(T_FLAGS) $(MAIN) $(NAME) -o prog.out
 
 .PHONY: all clean fclean re
